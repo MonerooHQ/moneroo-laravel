@@ -1,0 +1,58 @@
+image: php:8.1.0-fpm
+
+variables:
+  XDEBUG_MODE: coverage
+
+before_script:
+  - apt-get -qq update
+  - apt-get -qq install zip unzip -y
+  - apt-get -qq install git libicu-dev libpq-dev libzip-dev libsqlite3-dev zlib1g-dev -y
+  - docker-php-ext-install sockets pgsql pdo_pgsql pdo_mysql > /dev/null
+  - pecl install xdebug && docker-php-ext-enable xdebug
+  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  - php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+  - composer require --dev phpunit/phpunit phpunit/php-code-coverage
+
+stages:
+  - Build
+  - Code Quality
+  - Test
+
+composer:
+  stage: Build
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-composer
+    paths:
+      - vendor/
+  script:
+    - composer install
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - vendor/
+
+code_quality:
+  stage: Code Quality
+  script:
+    - vendor/bin/phpstan analyse --no-interaction
+
+unused_scanner:
+  stage: Code Quality
+  dependencies:
+    - composer
+  script:
+    - vendor/bin/unused_scanner unused-scanner.php
+
+unit_test:
+  stage: Test
+  dependencies:
+    - composer
+  script:
+    - vendor/bin/phpunit
+  artifacts:
+    reports:
+      junit:
+        - build/report.junit.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: build/logs/clover.xml

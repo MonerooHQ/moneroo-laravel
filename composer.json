@@ -1,0 +1,73 @@
+{
+    "name": "axazara/moneroo-laravel",
+    "description": "This is simple PHP Package for Laravel to interact with Moneroo API.",
+    "keywords": [
+        "AxaZara",
+        "laravel",
+        "moneroo",
+        "moneroo.io",
+        "moneroo-laravel"
+    ],
+    "homepage": "https://docs.moneroo.io/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Elias Elimah",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/contracts": "^9.40"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest",
+        "insolita/unused-scanner": "^2.4",
+        "friendsofphp/php-cs-fixer": "^1.0",
+        "nunomaduro/collision": "^6.0",
+        "nunomaduro/larastan": "^2.0.1",
+        "orchestra/testbench": "^7.0",
+        "pestphp/pest": "^1.21",
+        "pestphp/pest-plugin-laravel": "^1.1",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "AxaZara\\Moneroo\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AxaZara\\Moneroo\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "analyse": "vendor/bin/phpstan analyse",
+        "sniff": "vendor/bin/php-cs-fixer fix -vvv --dry-run --show-progress=dots",
+        "format": "vendor/bin/php-cs-fixer fix",
+        "unused": "vendor/bin/unused_scanner unused-scanner.php"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+              "MonerooServiceProvider"
+            ],
+            "aliases": {
+                "Moneroo": "Moneroo"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
