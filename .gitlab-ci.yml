@@ -26,13 +26,13 @@ Composer:
       - vendor/
   script:
     - composer install
-  only:
-    - main
-    - dev-*
   artifacts:
     expire_in: 1 day
     paths:
       - vendor/
+  only:
+    - main
+    - dev-*
 
 Code Style:
   stage: Code Quality
@@ -73,6 +73,6 @@ Unit Test:
       coverage_report:
         coverage_format: cobertura
         path: build/logs/clover.xml
-    only:
-      - main
-      - dev-*
+  only:
+    - main
+    - dev-*
