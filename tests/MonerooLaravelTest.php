@@ -11,4 +11,9 @@ class MonerooLaravelTest extends TestCase
         parent::setUp();
         Bus::fake();
     }
+
+    public function testExample(): void
+    {
+        $this->assertTrue(true);
+    }
 }
