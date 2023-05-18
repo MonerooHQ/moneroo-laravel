@@ -53,7 +53,7 @@ Static Analysis:
 Unused Package Scanner:
   stage: Code Quality
   dependencies:
-    - composer
+    - Composer
   script:
     - vendor/bin/unused_scanner unused-scanner.php
   only:
@@ -63,7 +63,7 @@ Unused Package Scanner:
 Unit Test:
   stage: Test
   dependencies:
-    - composer
+    - Composer
   script:
     - vendor/bin/phpunit
   artifacts:
