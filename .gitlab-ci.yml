@@ -26,13 +26,13 @@ Composer:
       - vendor/
   script:
     - composer install
+  only:
+    - main
+    - dev-*
   artifacts:
     expire_in: 1 day
     paths:
       - vendor/
-  only:
-    - main
-    - dev-*
 
 Code Style:
   stage: Code Quality
@@ -46,7 +46,7 @@ Static Analysis:
   stage: Code Quality
   script:
     - vendor/bin/phpstan analyse --memory-limit=1G
-  except:
+  only:
     - main
     - dev-*
 
