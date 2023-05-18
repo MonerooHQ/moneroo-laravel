@@ -30,7 +30,7 @@ Composer:
     expire_in: 1 day
     paths:
       - vendor/
-  except:
+  only:
     - main
     - dev-*
 
@@ -38,7 +38,7 @@ Code Style:
   stage: Code Quality
   script:
     - vendor/bin/php-cs-fixer fix -vvv --dry-run --show-progress=dots
-  except:
+  only:
     - main
     - dev-*
 
@@ -56,7 +56,7 @@ Unused Package Scanner:
     - composer
   script:
     - vendor/bin/unused_scanner unused-scanner.php
-  except:
+  only:
     - main
     - dev-*
 
@@ -73,6 +73,6 @@ Unit Test:
       coverage_report:
         coverage_format: cobertura
         path: build/logs/clover.xml
-    except:
+    only:
       - main
       - dev-*
