@@ -2,14 +2,14 @@
 
 namespace AxaZara\Moneroo\Console;
 
-use AxaZara\Moneroo\MonerooServiceProvider;
+use AxaZara\Moneroo\Providers\MonerooServiceProvider;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class InstallCommand extends Command
 {
-    protected $signature = 'Moneroo:install';
+    protected $signature = 'moneroo:install';
 
     protected $description = 'Install the Moneroo Laravel Package';
 
@@ -34,7 +34,7 @@ class InstallCommand extends Command
 
     private function configExists(): bool
     {
-        return File::exists(config_path('Moneroo-laravel.php'));
+        return File::exists(config_path('moneroo-laravel.php'));
     }
 
     private function shouldOverwriteConfig(): bool
@@ -49,7 +49,7 @@ class InstallCommand extends Command
     {
         $params = [
             '--provider' => MonerooServiceProvider::class,
-            '--tag' => 'config',
+            '--tag'      => 'config',
         ];
 
         if ($forcePublish === true) {
@@ -61,24 +61,32 @@ class InstallCommand extends Command
 
     /**
      * Updates the environment file with the basic configuration.
-     *
-     * @return void
      */
     public function updateEnvironmentFile(): void
     {
         if (File::exists($env = app()->environmentFile())) {
             $contents = File::get($env);
 
-            if (! Str::contains($contents, 'Moneroo_API_KEY=')) {
+            if (! Str::contains($contents, 'MONEROO_PUBLIC_KEY=')) {
                 File::append(
                     $env,
-                    PHP_EOL.'Moneroo_API_KEY='.'test-api-key'.PHP_EOL,
+                    PHP_EOL . 'MONEROO_PUBLIC_KEY=' . 'your-public-key' . PHP_EOL,
                 );
-                $this->info('Added Moneroo_API_KEY to your .env file');
-                $this->info('Please update the value with your Moneroo API key');
+                $this->info('Added MONEROO_PUBLIC_KEY to your .env file');
+                $this->info('Please update the value with your Moneroo Public Key');
             } else {
-                $this->info('Moneroo_API_KEY already exists in your .env file');
-                $this->warn('Please adjust the `Moneroo_API_KEY` environment variable.');
+                $this->info('MONEROO_PUBLIC_KEY already exists in your .env file');
+            }
+
+            if (! Str::contains($contents, 'MONEROO_SECRET_KEY=')) {
+                File::append(
+                    $env,
+                    PHP_EOL . 'MONEROO_SECRET_KEY=' . 'your-secret-key' . PHP_EOL,
+                );
+                $this->info('Added MONEROO_SECRET_KEY to your .env file');
+                $this->info('Please update the value with your Moneroo Secret Key');
+            } else {
+                $this->info('MONEROO_SECRET_KEY already exists in your .env file');
             }
         }
     }

@@ -3,82 +3,58 @@
 namespace AxaZara\Moneroo\Traits;
 
 use AxaZara\Moneroo\Config;
-use AxaZara\Moneroo\Exceptions\RequestError;
+use AxaZara\Moneroo\Exceptions\ForbiddenException;
+use AxaZara\Moneroo\Exceptions\InvalidPayloadException;
+use AxaZara\Moneroo\Exceptions\InvalidResourceException;
+use AxaZara\Moneroo\Exceptions\NotAcceptableException;
+use AxaZara\Moneroo\Exceptions\ServerErrorException;
+use AxaZara\Moneroo\Exceptions\ServiceUnavailableException;
+use AxaZara\Moneroo\Exceptions\UnauthorizedException;
 use Exception;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 
 trait Request
 {
-    private string $queue;
-
-    private array $body = [];
-
-    private string $method;
-
-    private string $endpoint;
-
-    public mixed $response;
-
-    private function makeRequest(): bool
+    protected function sendRequest(string $method, array $data, string $endpoint): object
     {
-        if ($this->apiUrl === 'test') {
-            Log::error('Moneroo :: You are using the test mode, no request has made to Moneroo API, please check your config file.');
-
-            $this->response = (object) [
-                'lead' => [],
-                'products' => [],
-                'product' => [],
-                'field' => [],
-                'fields' => [],
-                'THIS IS A TEST RESPONSE',
-            ];
-
-            return true;
-        }
-
-        $this->validate();
-
-        $payload = [
-            'method' => $this->method,
-            'body' => $this->body,
-            'url' => $this->apiUrl.$this->endpoint,
-        ];
-
-        return $this->dispatch($payload);
-    }
-
-    private function validate(): void
-    {
-        Config::validateApiUrl($this->apiUrl);
-        Config::validateApiKey($this->apiKey);
-    }
-
-    private function dispatch(array $payload): bool
-    {
-        $this->payload = (object) $payload;
-
         try {
-            $response = Http::asJson()
+            $request = Http::asJson()
                 ->acceptJson()
-                ->withHeaders([
-                    'Authorization' => config('Moneroo.api_key'),
-                ])->withBody(json_encode($this->payload->body, JSON_THROW_ON_ERROR), 'application/json')
-                ->{$this->payload->method}($this->payload->url);
+                ->withUserAgent('Moneroo Laravel SDK v' . Config::VERSION)
+                ->timeout(Config::TIMEOUT)
+                ->withToken($this->secretKey, 'Bearer')
+                ->baseUrl(Config::BASE_URL)
+                ->$method($endpoint, $data);
 
-            $this->response = (object) $response->json();
+            $payload = json_decode($request->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
 
-            if ($response->failed()) {
-                $this->lastError = $response->body() ?? 'Unknown error';
-                Log::error('Moneroo Error :: '.$this->lastError.' URL :: '.$this->payload->url.' Request Body :: '.json_encode($this->payload->body, JSON_THROW_ON_ERROR));
-
-                return false;
-            }
-
-            return true;
+            return $this->processResponse($payload, $request);
         } catch (Exception $e) {
-            Log::error('Moneroo :: Exception :'.$e->getMessage());
-            throw new RequestError($e->getMessage());
+            throw new ServerErrorException($e->getMessage());
+        }
+    }
+
+    private function processResponse(object $payload, $request): object
+    {
+        switch ($request->getStatusCode()) {
+            case 201:
+            case 200:
+                return $payload->data;
+            case 401:
+                throw new UnauthorizedException($payload->message);
+            case 403:
+                throw new ForbiddenException($payload->message);
+            case 404:
+                throw new InvalidResourceException($payload->message);
+            case 400:
+            case 422:
+                throw new InvalidPayloadException($payload->message);
+            case 406:
+                throw new NotAcceptableException($payload->message);
+            case 503:
+                throw new ServiceUnavailableException($payload->message);
+            default:
+                throw new ServerErrorException($payload->message);
         }
     }
 }

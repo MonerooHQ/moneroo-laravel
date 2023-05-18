@@ -2,27 +2,32 @@
 
 namespace AxaZara\Moneroo;
 
+use AxaZara\Moneroo\Exceptions\InvalidPayloadException;
+
 class Moneroo
 {
     use Traits\Request;
 
+    protected string $publicKey;
 
-    private object $payload;
-
-    private ?string $apiKey;
-
-    private ?string $apiUrl;
-
-    private ?string $lastError = null;
+    protected string $secretKey;
 
     public function __construct()
     {
-        $this->apiKey = config('Moneroo.api_key');
-        $this->apiUrl = config('Moneroo.api_url');
+        $this->publicKey = config('moneroo.publicKey');
+        $this->secretKey = config('moneroo.secretKey');
+
+        $this->validateConfig();
     }
 
-    public function getLastError(): ?string
+    private function validateConfig(): void
     {
-        return $this->lastError;
+        if (empty($this->publicKey)) {
+            throw new InvalidPayloadException('Moneroo public key is not set.');
+        }
+
+        if (empty($this->secretKey)) {
+            throw new InvalidPayloadException('Moneroo secret key is not set.');
+        }
     }
 }

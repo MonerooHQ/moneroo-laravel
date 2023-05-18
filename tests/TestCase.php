@@ -2,7 +2,7 @@
 
 namespace AxaZara\Moneroo\Tests;
 
-use AxaZara\Moneroo\MonerooServiceProvider;
+use AxaZara\Moneroo\Providers\MonerooServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra

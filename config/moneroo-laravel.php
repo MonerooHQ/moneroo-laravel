@@ -2,6 +2,6 @@
 
 // config for AxaZara/Moneroo
 return [
-    'api_url' => env('Moneroo_API_URL', 'https://api.Moneroo.com/api'),
-    'api_key' => env('Moneroo_API_KEY', 'default'),
+    'publicKey' => env('MONEROO_PUBLIC_KEY'),
+    'secretKey' => env('MONEROO_SECRET_KEY'),
 ];

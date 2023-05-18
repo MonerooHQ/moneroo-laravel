@@ -1,7 +1,10 @@
 <?php
 
-namespace AxaZara\Moneroo;
+namespace AxaZara\Moneroo\Providers;
 
+use AxaZara\Moneroo\Console;
+use AxaZara\Moneroo\Facades;
+use AxaZara\Moneroo\Moneroo;
 use Illuminate\Support\ServiceProvider;
 
 class MonerooServiceProvider extends ServiceProvider
@@ -20,7 +23,7 @@ class MonerooServiceProvider extends ServiceProvider
                 Console\InstallCommand::class,
             ]);
             $this->publishes([
-                __DIR__.'/../config/moneroo-laravel.php' => config_path('moneroo.php'),
+                __DIR__ . '/../config/moneroo-laravel.php' => config_path('moneroo.php'),
             ], 'config');
         }
 
