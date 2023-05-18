@@ -18,7 +18,7 @@ stages:
   - Code Quality
   - Test
 
-composer:
+Composer:
   stage: Build
   cache:
     key: ${CI_COMMIT_REF_SLUG}-composer
@@ -30,20 +30,37 @@ composer:
     expire_in: 1 day
     paths:
       - vendor/
+  except:
+    - main
+    - dev-*
 
-code_quality:
+Code Style:
   stage: Code Quality
   script:
-    - vendor/bin/phpstan analyse --no-interaction
+    - vendor/bin/php-cs-fixer fix -vvv --dry-run --show-progress=dots
+  except:
+    - main
+    - dev-*
 
-unused_scanner:
+Static Analysis:
+  stage: Code Quality
+  script:
+    - vendor/bin/phpstan analyse --memory-limit=1G
+  except:
+    - main
+    - dev-*
+
+Unused Package Scanner:
   stage: Code Quality
   dependencies:
     - composer
   script:
     - vendor/bin/unused_scanner unused-scanner.php
+  except:
+    - main
+    - dev-*
 
-unit_test:
+Unit Test:
   stage: Test
   dependencies:
     - composer
@@ -56,3 +73,6 @@ unit_test:
       coverage_report:
         coverage_format: cobertura
         path: build/logs/clover.xml
+    except:
+      - main
+      - dev-*
