@@ -21,8 +21,7 @@
         "illuminate/contracts": "^7.0 || ^8.0 || ^9.0 || ^10.0"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest",
-        "friendsofphp/php-cs-fixer": "^3.15",
+        "friendsofphp/php-cs-fixer": "^3.17",
         "insolita/unused-scanner": "^2.4",
         "nunomaduro/collision": "^6.0",
         "nunomaduro/larastan": "^2.0.1",
@@ -30,7 +29,8 @@
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
-        "phpunit/phpunit": "^9.6"
+        "phpunit/phpunit": "^9.6",
+        "roave/security-advisories": "dev-latest"
     },
     "autoload": {
         "psr-4": {
@@ -59,10 +59,11 @@
     "extra": {
         "laravel": {
             "providers": [
-              "MonerooServiceProvider"
+                "AxaZara\\Moneroo\\Providers\\MonerooServiceProvider"
             ],
             "aliases": {
-                "Moneroo": "Moneroo"
+                "MonerooPayment": "AxaZara\\Moneroo\\Facades\\PaymentFacade",
+                "MonerooPayout": "AxaZara\\Moneroo\\Facades\\PayoutFacade"
             }
         }
     },

@@ -3,14 +3,15 @@
 namespace AxaZara\Moneroo;
 
 use AxaZara\Moneroo\Exceptions\InvalidPayloadException;
+use Exception;
 
 class Moneroo
 {
     use Traits\Request;
 
-    protected string $publicKey;
+    protected ?string $publicKey;
 
-    protected string $secretKey;
+    protected ?string $secretKey;
 
     public function __construct()
     {
@@ -28,6 +29,19 @@ class Moneroo
 
         if (empty($this->secretKey)) {
             throw new InvalidPayloadException('Moneroo secret key is not set.');
+        }
+    }
+
+    protected function validateData(array $data, $rules): void
+    {
+        try {
+            $validation = validator()->make($data, $rules);
+
+            if ($validation->fails()) {
+                throw new InvalidPayloadException($validation->errors()->first());
+            }
+        } catch (Exception $e) {
+            throw new InvalidPayloadException($e->getMessage());
         }
     }
 }
