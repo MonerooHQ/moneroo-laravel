@@ -42,7 +42,7 @@ class Payment extends Moneroo
             'customer.country'       => 'string',
             'customer.zip'           => 'string',
             'description'            => 'string',
-            'return_url'           => 'required|string|url',
+            'return_url'             => 'required|string|url',
             'metadata'               => 'nullable|array',
             'methods'                => 'nullable|array',
         ];
