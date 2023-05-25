@@ -21,7 +21,7 @@ class Payment extends Moneroo
         return $this->sendRequest('get', [], '/payments/' . $paymentTransactionId);
     }
 
-    public function makeAsProcessed(string $paymentTransactionId): object
+    public function markAsProcessed(string $paymentTransactionId): object
     {
         return $this->sendRequest('post', [], '/payments/' . $paymentTransactionId . '/process');
     }
