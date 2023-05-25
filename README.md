@@ -95,7 +95,7 @@ $paymentData = [
     'methods' => ['card', 'orange_ci'],
 ];
 
-$payment = \Moneroo\Payment::create($paymentData);
+$payment = MonerooPayment::create($paymentData);
 
 // Redirect the customer to the Checkout URL
 header('Location: ' . $payment->checkout_url);
@@ -113,7 +113,7 @@ This is useful when you want to check the status of a payment before processing 
 ```php
 $transactionId = 'your-payment-transaction-id';
 
-$payment = \Moneroo\Payment::verify($transactionId);
+$payment = MonerooPayment::verify($transactionId);
 ```
 
 ### Retrieve Payment
@@ -123,7 +123,7 @@ To get details of a payment, use the `get` method with the transaction ID.
 ```php
 $transactionId = 'your-payment-transaction-id';
 
-$payment = \Moneroo\Payment::get($transactionId);
+$payment = MonerooPayment::get($transactionId);
 ```
 
 ### Mark Payment as Processed
@@ -140,7 +140,7 @@ Example usage:
 ```php
 $transactionId = 'your-payment-transaction-id';
 
-$payment = \Moneroo\Payment::markAsProcessed($transactionId);
+$payment = MonerooPayment::markAsProcessed($transactionId);
 ```
 
 ## Payout
