@@ -5,10 +5,10 @@ use PhpCsFixer\Finder;
 
 $rules = [
     '@PSR12'                       => true,
-    'array_indentation'           => true,
-    'array_syntax'                => ['syntax' => 'short'],
-    'combine_consecutive_unsets'  => true,
-    'class_attributes_separation' => ['elements' => [
+    'array_indentation'            => true,
+    'array_syntax'                 => ['syntax' => 'short'],
+    'combine_consecutive_unsets'   => true,
+    'class_attributes_separation'  => ['elements' => [
         'method'       => 'one',
         'property'     => 'one',
         'const'        => 'one',
@@ -22,23 +22,26 @@ $rules = [
             '=>' => 'align',
         ],
     ],
-    'blank_line_after_opening_tag' => true,
-    'braces'                       => [
-        'allow_single_line_closure'         => true,
-        'position_after_control_structures' => 'next',
-    ],
-    'concat_space'                       => ['spacing' => 'one'],
-    'declare_equal_normalize'            => true,
-    'function_typehint_space'            => true,
-    'include'                            => true,
-    'lowercase_cast'                     => true,
-    'no_blank_lines_after_class_opening' => true,
-    'no_blank_lines_after_phpdoc'        => true,
-    'no_empty_comment'                   => true,
-    'no_empty_phpdoc'                    => true,
-    'no_empty_statement'                 => true,
-    'not_operator_with_successor_space'  => true,
-    'no_extra_blank_lines'               => [
+    'curly_braces_position'                   => true,
+    'blank_line_after_opening_tag'            => true,
+    'single_space_around_construct'           => true,
+    'control_structure_braces'                => true,
+    'control_structure_continuation_position' => true,
+    'declare_parentheses'                     => true,
+    'statement_indentation'                   => true,
+    'no_multiple_statements_per_line'         => true,
+    'concat_space'                            => ['spacing' => 'one'],
+    'declare_equal_normalize'                 => true,
+    'function_typehint_space'                 => true,
+    'include'                                 => true,
+    'lowercase_cast'                          => true,
+    'no_blank_lines_after_class_opening'      => true,
+    'no_blank_lines_after_phpdoc'             => true,
+    'no_empty_comment'                        => true,
+    'no_empty_phpdoc'                         => true,
+    'no_empty_statement'                      => true,
+    'not_operator_with_successor_space'       => true,
+    'no_extra_blank_lines'                    => [
         'tokens' => [
             'curly_brace_block',
             'extra',
@@ -77,7 +80,6 @@ $rules = [
     'phpdoc_types'                                => true,
     'return_type_declaration'                     => true,
     'short_scalar_cast'                           => true,
-    'single_blank_line_before_namespace'          => true,
     'single_class_element_per_statement'          => true,
     'space_after_semicolon'                       => true,
     'standardize_not_equals'                      => true,
@@ -111,4 +113,4 @@ $config = new Config();
 return $config->setFinder($finder)
     ->setRules($rules)
     ->setRiskyAllowed(true)
-    ->setUsingCache(false);
+    ->setUsingCache(true);
