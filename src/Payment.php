@@ -2,6 +2,9 @@
 
 namespace AxaZara\Moneroo;
 
+use AxaZara\Moneroo\Rules\Payment\ValidatePaymentCurrencyExists;
+use AxaZara\Moneroo\Rules\Payment\ValidatePaymentMethods;
+
 class Payment extends Moneroo
 {
     public function create(array $data): object
@@ -28,9 +31,9 @@ class Payment extends Moneroo
 
     private function paymentValidationRules(): array
     {
-        return  [
+        return [
             'amount'                 => 'required|integer',
-            'currency'               => 'required|string',
+            'currency'               => ['required', 'string', new ValidatePaymentCurrencyExists()],
             'customer'               => 'required|array',
             'customer.email'         => 'required|string',
             'customer.first_name'    => 'required|string',
@@ -41,10 +44,11 @@ class Payment extends Moneroo
             'customer.state'         => 'string',
             'customer.country'       => 'string',
             'customer.zip'           => 'string',
-            'description'            => 'string',
+            'description'            => 'string|max:155',
             'return_url'             => 'required|string|url',
             'metadata'               => 'nullable|array',
-            'methods'                => 'nullable|array',
+            'metadata.*'             => 'string',
+            'methods'                => ['nullable', 'array', new ValidatePaymentMethods()],
         ];
     }
 }

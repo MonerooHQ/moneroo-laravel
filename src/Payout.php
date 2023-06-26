@@ -2,11 +2,19 @@
 
 namespace AxaZara\Moneroo;
 
+use AxaZara\Moneroo\Exceptions\InvalidPayloadException;
+use AxaZara\Moneroo\Rules\Payout\ValidatePayoutCurrencyExists;
+use AxaZara\Moneroo\Rules\Payout\ValidatePayoutMethod;
+use AxaZara\Moneroo\Utils\PayoutUtil;
+use Illuminate\Support\Facades\Validator;
+
 class Payout extends Moneroo
 {
     public function create(array $data): object
     {
         $this->validateData($data, $this->payoutValidationRules());
+
+        $this->validatePayoutMethodRequiredFields($data);
 
         return $this->sendRequest('post', $data, '/payouts/initialize');
     }
@@ -23,9 +31,9 @@ class Payout extends Moneroo
 
     private function payoutValidationRules(): array
     {
-        return  [
+        return [
             'amount'                 => 'required|integer',
-            'currency'               => 'required|string',
+            'currency'               => ['required', 'string', new ValidatePayoutCurrencyExists()],
             'customer'               => 'required|array',
             'customer.email'         => 'required|string',
             'customer.first_name'    => 'required|string',
@@ -39,7 +47,24 @@ class Payout extends Moneroo
             'description'            => 'string',
             'metadata'               => 'nullable|array',
             'metadata.*'             => 'string',
-            'method'                 => 'required|string',
+            'method'                 => ['required', 'string', new ValidatePayoutMethod()],
         ];
+    }
+
+    private function validatePayoutMethodRequiredFields(array $data): void
+    {
+        if (! isset($data['method'])) {
+            throw new InvalidPayloadException('Payout method is required.');
+        }
+
+        $validationRules = PayoutUtil::getMethodFieldsValidationRules($data['method']);
+
+        $validator = Validator::make($data, $validationRules, [
+            'required' => 'The ":attribute" field is required for this payout method.',
+        ]);
+
+        if ($validator->fails()) {
+            throw new InvalidPayloadException($validator->errors()->first());
+        }
     }
 }
