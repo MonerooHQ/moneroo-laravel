@@ -29,7 +29,7 @@ class PayoutUtil
                     [
                         'type'       => 'integer',
                         'name'       => 'phone',
-                        'validation' => 'required|numeric|starts_with:229|digits:11',
+                        'validation' => 'required|dd|starts_with:229|digits:11',
                     ],
                 ],
             ],

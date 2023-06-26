@@ -47,7 +47,11 @@
         "analyse": "vendor/bin/phpstan analyse",
         "sniff": "vendor/bin/php-cs-fixer fix -vvv --dry-run --show-progress=dots",
         "format": "vendor/bin/php-cs-fixer fix",
-        "unused": "vendor/bin/unused_scanner unused-scanner.php"
+        "unused": "vendor/bin/unused_scanner unused-scanner.php",
+        "test": [
+            "Composer\\Config::disableProcessTimeout",
+            "vendor/bin/phpunit --testdox"
+        ]
     },
     "config": {
         "sort-packages": true,

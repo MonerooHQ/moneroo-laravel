@@ -32,7 +32,7 @@ class Moneroo
         }
     }
 
-    protected function validateData(array $data, $rules): void
+    public function validateData(array $data, $rules): void
     {
         try {
             $validation = validator()->make($data, $rules);

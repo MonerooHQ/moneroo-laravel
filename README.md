@@ -53,7 +53,7 @@ Here are the required fields in a table format:
 | `customer.email`    | string  | Yes      | Customer's email address.          |
 | `customer.first_name` | string  | Yes      | Customer's first name.             |
 | `customer.last_name` | string  | Yes      | Customer's last name.              |
-| `callback_url`      | string  | Yes      | Callback URL for payment updates.  |
+| `return_url`      | string  | Yes      | Callback URL for payment updates.  |
 | `customer.phone`    | string  | No**     | Customer's phone number.           |
 | `customer.address`  | string  | No**     | Customer's address.                |
 | `customer.city`     | string  | No**     | Customer's city.                   |
@@ -87,7 +87,7 @@ $paymentData = [
         'zip' => '90001',
     ],
     'description' => 'Payment for order #123',
-    'callback_url' => 'https://yourwebsite.com/thanks',
+    'return_url' => 'https://yourwebsite.com/thanks',
     'metadata' => [
         'order_id' => '123',
         'customer_id' => '456',
@@ -154,23 +154,23 @@ The array must contain the following keys:
 
 Here are the required fields in a table format:
 
-| Field Name             | Type    | Required | Description                                        |
-|------------------------|---------|----------|----------------------------------------------------|
-| `amount`               | integer | Yes      | The payout amount.                                 |
-| `currency`             | string  | Yes      | The currency of the payout.                        |
-| `description`          | string  | No**     | Description of the payout.                         |
-| `customer.email`       | string  | Yes      | Customer's email address.                          |
-| `customer.first_name`  | string  | Yes      | Customer's first name.                             |
-| `customer.last_name`   | string  | Yes      | Customer's last name.                              |
-| `callback_url`         | string  | Yes      | Callback URL for payout updates.                   |
-| `customer.phone`       | string  | No       | Customer's phone number.                           |
-| `customer.address`     | string  | No       | Customer's address.                                |
-| `customer.city`        | string  | No       | Customer's city.                                   |
-| `customer.state`       | string  | No       | Customer's state.                                  |
-| `customer.country`     | string  | No       | Customer's country.                                |
-| `customer.zip`         | string  | No       | Customer's zip code.                               |
-| `metadata`             | array   | No       | Additional data for the payout.                    |
-| `method`               | string  | No**     | Payout methods                                     |
+| Field Name             | Type    | Required | Description                                       |
+|------------------------|---------|----------|---------------------------------------------------|
+| `amount`               | integer | Yes      | The payout amount.                                |
+| `currency`             | string  | Yes      | The currency of the payout.                       |
+| `description`          | string  | No**     | Description of the payout.                        |
+| `customer.email`       | string  | Yes      | Customer's email address.                         |
+| `customer.first_name`  | string  | Yes      | Customer's first name.                            |
+| `customer.last_name`   | string  | Yes      | Customer's last name.                             |
+| `return_url`         | string  | Yes      | Callback URL for payout updates.                  |
+| `customer.phone`       | string  | No       | Customer's phone number.                          |
+| `customer.address`     | string  | No       | Customer's address.                               |
+| `customer.city`        | string  | No       | Customer's city.                                  |
+| `customer.state`       | string  | No       | Customer's state.                                 |
+| `customer.country`     | string  | No       | Customer's country.                               |
+| `customer.zip`         | string  | No       | Customer's zip code.                              |
+| `metadata`             | array   | No       | Additional data for the payout.                   |
+| `method`               | string  | No**     | Payout method                                     |
 | `request_confirmation` | bool    | No***    | If you want to require confirmation from customer. |
 
 >In addition to the above informations, you need to add payout methods required fields for account details.
