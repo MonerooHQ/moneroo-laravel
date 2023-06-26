@@ -18,20 +18,29 @@ trait Request
     protected function sendRequest(string $method, array $data, string $endpoint): object
     {
         try {
-            $request = Http::asJson()
-                ->acceptJson()
-                ->withUserAgent('Moneroo Laravel SDK v' . Config::VERSION)
-                ->timeout(Config::TIMEOUT)
-                ->withToken($this->secretKey, 'Bearer')
-                ->baseUrl(Config::BASE_URL)
-                ->$method($endpoint, $data);
-
-            $payload = json_decode($request->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
+            $request = $this->prepareRequest($method, $data, $endpoint);
+            $payload = $this->decodePayload($request);
 
             return $this->processResponse($payload, $request);
         } catch (Exception $e) {
             throw new ServerErrorException($e->getMessage());
         }
+    }
+
+    private function prepareRequest(string $method, array $data, string $endpoint)
+    {
+        return Http::asJson()
+            ->acceptJson()
+            ->withUserAgent('Moneroo Laravel SDK v' . Config::VERSION)
+            ->timeout(Config::TIMEOUT)
+            ->withToken($this->secretKey, 'Bearer')
+            ->baseUrl(Config::BASE_URL)
+            ->$method($endpoint, $data);
+    }
+
+    private function decodePayload($request): object
+    {
+        return json_decode($request->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
     }
 
     private function processResponse(object $payload, $request): object
