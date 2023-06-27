@@ -7,32 +7,29 @@ assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+# Description
+<!-- Description of the issue -->
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+# Steps to Reproduce
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+1. <!-- First Step -->
+2. <!-- Second Step -->
+3. <!-- and so on… -->
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+## Expected behaviour
+<!-- What you expect to happen -->
 
-**Desktop (please complete the following information):**
-- OS: [e.g. iOS]
-- Browser [e.g. chrome, safari]
-- Version [e.g. 22]
+## Actual behaviour
+<!-- What actually happens -->
 
-**Smartphone (please complete the following information):**
-- Device: [e.g. iPhone6]
-- OS: [e.g. iOS8.1]
-- Browser [e.g. stock browser, safari]
-- Version [e.g. 22]
+## Reproduces how often
+<!-- What percentage of the time does it reproduce? -->
 
-**Additional context**
-Add any other context about the problem here.
+# Configuration
+- API Version: <!-- v2 or v3 -->
+- Environment: <!-- test mode or live mode  -->
+- Browser: <!-- [all | Chrome XX | Firefox XX | IE XX | Safari XX | Mobile Chrome XX | Android X.X Web Browser | iOS XX Safari | iOS XX UIWebView | iOS XX WKWebView ]  -->
+- Language: <!-- [all | Node X.X | TypeScript X.X | Python X.X | ES6/7 | ES5 | Dart | Android X.X | PHP X.X | Laravel X.X ]  -->
+
+# Additional Information
+<!-- Any additional information, configuration or data that might be necessary to reproduce the issue e.g. detailed explanation, stack traces, related issues, suggestions on how to fix, links for us to have more context like StackOverflow, Gitter, etc. -->

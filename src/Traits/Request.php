@@ -10,34 +10,34 @@ use AxaZara\Moneroo\Exceptions\NotAcceptableException;
 use AxaZara\Moneroo\Exceptions\ServerErrorException;
 use AxaZara\Moneroo\Exceptions\ServiceUnavailableException;
 use AxaZara\Moneroo\Exceptions\UnauthorizedException;
-use Exception;
+use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Support\Facades\Http;
+use JsonException;
 
 trait Request
 {
     protected function sendRequest(string $method, array $data, string $endpoint): object
     {
         try {
-            $request = $this->prepareRequest($method, $data, $endpoint);
+            $request = Http::asJson()
+                ->acceptJson()
+                ->withUserAgent('Moneroo Laravel SDK v' . Config::VERSION)
+                ->timeout(Config::TIMEOUT)
+                ->withToken($this->secretKey, 'Bearer')
+                ->baseUrl($this->baseUrl)
+                ->$method($endpoint, $data);
+
             $payload = $this->decodePayload($request);
 
             return $this->processResponse($payload, $request);
-        } catch (Exception $e) {
+        } catch (ConnectException|JsonException $e) {
             throw new ServerErrorException($e->getMessage());
         }
     }
 
-    private function prepareRequest(string $method, array $data, string $endpoint)
-    {
-        return Http::asJson()
-            ->acceptJson()
-            ->withUserAgent('Moneroo Laravel SDK v' . Config::VERSION)
-            ->timeout(Config::TIMEOUT)
-            ->withToken($this->secretKey, 'Bearer')
-            ->baseUrl(Config::BASE_URL)
-            ->$method($endpoint, $data);
-    }
-
+    /**
+     * @throws JsonException
+     */
     private function decodePayload($request): object
     {
         return json_decode($request->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
