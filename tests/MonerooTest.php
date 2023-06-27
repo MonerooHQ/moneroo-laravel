@@ -5,6 +5,7 @@ namespace AxaZara\Moneroo\Tests;
 use AxaZara\Moneroo\Exceptions\InvalidPayloadException;
 use AxaZara\Moneroo\Moneroo;
 use Illuminate\Support\Facades\Config;
+
 class MonerooTest extends TestCase
 {
     public function setUp(): void

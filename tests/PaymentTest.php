@@ -2,8 +2,8 @@
 
 namespace AxaZara\Moneroo\Tests;
 
-use AxaZara\Moneroo\Payment;
 use AxaZara\Moneroo\Exceptions\InvalidPayloadException;
+use AxaZara\Moneroo\Payment;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 
@@ -26,12 +26,12 @@ class PaymentTest extends TestCase
     public function payment_creation_with_valid_data_is_successful(): void
     {
         $data = [
-            'amount' => 100,
+            'amount'   => 100,
             'currency' => 'USD',
             'customer' => [
-                'email' => 'test@test.com',
+                'email'      => 'test@test.com',
                 'first_name' => 'Test',
-                'last_name' => 'User',
+                'last_name'  => 'User',
             ],
             'return_url' => 'http://example.com/return',
         ];
@@ -62,16 +62,16 @@ class PaymentTest extends TestCase
 
         // Try with invalid types
         $data = [
-            'amount' => 'one hundred', // Should be integer
-            'currency' => ['currency' => 'USD'], // Should be string
-            'customer' => 'Test User', // Should be array
+            'amount'     => 'one hundred', // Should be integer
+            'currency'   => ['currency' => 'USD'], // Should be string
+            'customer'   => 'Test User', // Should be array
             'return_url' => 'not a URL', // Should be a valid URL
         ];
         $payment->create($data);
 
         // Try with missing fields
         $data = [
-            'amount' => 100,
+            'amount'   => 100,
             'currency' => 'USD',
             // 'customer' is missing
             'return_url' => 'http://example.com/return',
