@@ -1,9 +1,9 @@
 <?php
 
-namespace AxaZara\Moneroo\Rules\Payout;
+namespace Moneroo\Rules\Payout;
 
-use AxaZara\Moneroo\Utils\PayoutUtil;
 use Illuminate\Contracts\Validation\Rule;
+use Moneroo\Utils\PayoutUtil;
 
 class ValidatePayoutCurrencyExists implements Rule
 {

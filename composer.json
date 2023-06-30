@@ -22,7 +22,7 @@
         "illuminate/contracts": "^7.0 || ^8.0 || ^9.0 || ^10.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.19",
+        "friendsofphp/php-cs-fixer": "^3.20",
         "insolita/unused-scanner": "^2.4",
         "nunomaduro/collision": "^6.0",
         "nunomaduro/larastan": "^2.6",
@@ -31,16 +31,17 @@
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.3",
         "phpunit/phpunit": "^9.6",
-        "roave/security-advisories": "dev-latest"
+        "roave/security-advisories": "dev-latest",
+        "spatie/laravel-ray": "^1.32"
     },
     "autoload": {
         "psr-4": {
-            "AxaZara\\Moneroo\\": "src"
+            "Moneroo\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "AxaZara\\Moneroo\\Tests\\": "tests"
+            "Moneroo\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -64,11 +65,11 @@
     "extra": {
         "laravel": {
             "providers": [
-                "AxaZara\\Moneroo\\Providers\\MonerooServiceProvider"
+                "Moneroo\\Providers\\MonerooServiceProvider"
             ],
             "aliases": {
-                "MonerooPayment": "AxaZara\\Moneroo\\Facades\\PaymentFacade",
-                "MonerooPayout": "AxaZara\\Moneroo\\Facades\\PayoutFacade"
+                "MonerooPayment": "Moneroo\\Facades\\PaymentFacade",
+                "MonerooPayout": "Moneroo\\Facades\\PayoutFacade"
             }
         }
     },

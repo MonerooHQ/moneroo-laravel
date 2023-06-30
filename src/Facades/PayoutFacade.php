@@ -1,6 +1,6 @@
 <?php
 
-namespace AxaZara\Moneroo\Facades;
+namespace Moneroo\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

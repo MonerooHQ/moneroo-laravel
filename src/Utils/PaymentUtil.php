@@ -1,6 +1,6 @@
 <?php
 
-namespace AxaZara\Moneroo\Utils;
+namespace Moneroo\Utils;
 
 class PaymentUtil
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace AxaZara\Moneroo\Tests;
+namespace Moneroo\Tests;
 
-use AxaZara\Moneroo\Exceptions\InvalidPayloadException;
-use AxaZara\Moneroo\Moneroo;
 use Illuminate\Support\Facades\Config;
+use Moneroo\Exceptions\InvalidPayloadException;
+use Moneroo\Moneroo;
 
 class MonerooTest extends TestCase
 {

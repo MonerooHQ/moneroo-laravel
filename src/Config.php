@@ -1,6 +1,6 @@
 <?php
 
-namespace AxaZara\Moneroo;
+namespace Moneroo;
 
 class Config
 {

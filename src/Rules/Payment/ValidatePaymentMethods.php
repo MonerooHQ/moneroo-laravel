@@ -1,9 +1,9 @@
 <?php
 
-namespace AxaZara\Moneroo\Rules\Payment;
+namespace Moneroo\Rules\Payment;
 
-use AxaZara\Moneroo\Utils\PaymentUtil;
 use Illuminate\Contracts\Validation\Rule;
+use Moneroo\Utils\PaymentUtil;
 
 class ValidatePaymentMethods implements Rule
 {

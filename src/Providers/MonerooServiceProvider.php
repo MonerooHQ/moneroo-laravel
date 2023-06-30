@@ -1,18 +1,21 @@
 <?php
 
-namespace AxaZara\Moneroo\Providers;
+namespace Moneroo\Providers;
 
-use AxaZara\Moneroo\Console;
-use AxaZara\Moneroo\Facades;
-use AxaZara\Moneroo\Moneroo;
-use AxaZara\Moneroo\Payment;
-use AxaZara\Moneroo\Payout;
 use Illuminate\Support\ServiceProvider;
+use Moneroo\Console;
+use Moneroo\Facades;
+use Moneroo\Moneroo;
+use Moneroo\Payment;
+use Moneroo\Payout;
 
 class MonerooServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
+        require_once __DIR__ . '/../Helper/monerooPayment.php';
+        require_once __DIR__ . '/../Helper/monerooPayout.php';
+
         $this->app->bind('moneroo', function () {
             return new Moneroo();
         });

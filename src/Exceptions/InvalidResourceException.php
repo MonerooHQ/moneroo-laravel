@@ -1,6 +1,6 @@
 <?php
 
-namespace AxaZara\Moneroo\Exceptions;
+namespace Moneroo\Exceptions;
 
 use RuntimeException;
 

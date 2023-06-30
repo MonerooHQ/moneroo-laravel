@@ -1,19 +1,20 @@
 <?php
 
-namespace AxaZara\Moneroo;
+namespace Moneroo;
 
-use AxaZara\Moneroo\Exceptions\InvalidPayloadException;
 use Exception;
+use Illuminate\Support\Facades\Validator;
+use Moneroo\Exceptions\InvalidPayloadException;
 
 class Moneroo
 {
     use Traits\Request;
 
-    protected ?string $publicKey;
+    protected readonly ?string $publicKey;
 
-    protected ?string $secretKey;
+    protected readonly ?string $secretKey;
 
-    protected string $baseUrl;
+    protected readonly string $baseUrl;
 
     public function __construct()
     {
@@ -24,11 +25,6 @@ class Moneroo
             ? config('moneroo.devBaseUrl')
             : Config::BASE_URL;
 
-        $this->validateConfig();
-    }
-
-    private function validateConfig(): void
-    {
         if (empty($this->publicKey) || ! is_string($this->publicKey)) {
             throw new InvalidPayloadException('Moneroo public key is not set or not a string.');
         }
@@ -41,10 +37,10 @@ class Moneroo
     public function validateData(array $data, $rules): void
     {
         try {
-            $validation = validator()->make($data, $rules);
+            $validator = Validator::make($data, $rules);
 
-            if ($validation->fails()) {
-                throw new InvalidPayloadException($validation->errors()->first());
+            if ($validator->fails()) {
+                throw new InvalidPayloadException(implode(', ', $validator->errors()->all()));
             }
         } catch (Exception $e) {
             throw new InvalidPayloadException($e->getMessage());

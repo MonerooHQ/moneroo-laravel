@@ -1,11 +1,11 @@
 <?php
 
-namespace AxaZara\Moneroo\Console;
+namespace Moneroo\Console;
 
-use AxaZara\Moneroo\Providers\MonerooServiceProvider;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Moneroo\Providers\MonerooServiceProvider;
 
 class InstallCommand extends Command
 {

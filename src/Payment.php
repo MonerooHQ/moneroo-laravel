@@ -1,9 +1,9 @@
 <?php
 
-namespace AxaZara\Moneroo;
+namespace Moneroo;
 
-use AxaZara\Moneroo\Rules\Payment\ValidatePaymentCurrencyExists;
-use AxaZara\Moneroo\Rules\Payment\ValidatePaymentMethods;
+use Moneroo\Rules\Payment\ValidatePaymentCurrencyExists;
+use Moneroo\Rules\Payment\ValidatePaymentMethods;
 
 class Payment extends Moneroo
 {
@@ -32,22 +32,22 @@ class Payment extends Moneroo
     private function paymentValidationRules(): array
     {
         return [
-            'amount'                 => 'required|integer',
+            'amount'                 => 'required|numeric|gt:0',
             'currency'               => ['required', 'string', new ValidatePaymentCurrencyExists()],
+            'description'            => ['string', 'required', 'max:155'],
             'customer'               => 'required|array',
-            'customer.email'         => 'required|string',
-            'customer.first_name'    => 'required|string',
-            'customer.last_name'     => 'required|string',
-            'customer.phone'         => 'string',
-            'customer.address'       => 'string',
-            'customer.city'          => 'string',
-            'customer.state'         => 'string',
-            'customer.country'       => 'string',
-            'customer.zip'           => 'string',
-            'description'            => 'string|max:155',
-            'return_url'             => 'required|string|url',
-            'metadata'               => 'nullable|array',
-            'metadata.*'             => 'string',
+            'customer.*'             => 'string',
+            'customer.email'         => 'email|required',
+            'customer.first_name'    => 'string|max:100|required',
+            'customer.last_name'     => 'string|max:100|required',
+            'customer.phone'         => 'integer|nullable',
+            'customer.address'       => 'string|max:200|nullable',
+            'customer.city'          => 'string|max:100|nullable',
+            'customer.state'         => 'string|max:100|nullable',
+            'customer.country'       => 'string|max:10|nullable',
+            'customer.zip'           => 'string|max:100|nullable',
+            'metadata'               => ['array', 'max:10', 'nullable'],
+            'metadata.*'             => ['string'],
             'methods'                => ['nullable', 'array', new ValidatePaymentMethods()],
         ];
     }

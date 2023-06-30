@@ -1,12 +1,12 @@
 <?php
 
-namespace AxaZara\Moneroo;
+namespace Moneroo;
 
-use AxaZara\Moneroo\Exceptions\InvalidPayloadException;
-use AxaZara\Moneroo\Rules\Payout\ValidatePayoutCurrencyExists;
-use AxaZara\Moneroo\Rules\Payout\ValidatePayoutMethod;
-use AxaZara\Moneroo\Utils\PayoutUtil;
 use Illuminate\Support\Facades\Validator;
+use Moneroo\Exceptions\InvalidPayloadException;
+use Moneroo\Rules\Payout\ValidatePayoutCurrencyExists;
+use Moneroo\Rules\Payout\ValidatePayoutMethod;
+use Moneroo\Utils\PayoutUtil;
 
 class Payout extends Moneroo
 {
@@ -32,21 +32,22 @@ class Payout extends Moneroo
     private function payoutValidationRules(): array
     {
         return [
-            'amount'                 => 'required|integer',
+            'amount'                 => 'required|numeric|gt:0',
             'currency'               => ['required', 'string', new ValidatePayoutCurrencyExists()],
+            'description'            => ['string', 'required', 'max:155'],
             'customer'               => 'required|array',
-            'customer.email'         => 'required|string',
-            'customer.first_name'    => 'required|string',
-            'customer.last_name'     => 'required|string',
-            'customer.phone'         => 'integer',
-            'customer.address'       => 'string',
-            'customer.city'          => 'string',
-            'customer.state'         => 'string',
-            'customer.country'       => 'string',
-            'customer.zip'           => 'string',
-            'description'            => 'string',
-            'metadata'               => 'nullable|array',
-            'metadata.*'             => 'string',
+            'customer.*'             => 'string',
+            'customer.email'         => 'email|required',
+            'customer.first_name'    => 'string|max:100|required',
+            'customer.last_name'     => 'string|max:100|required',
+            'customer.phone'         => 'integer|nullable',
+            'customer.address'       => 'string|max:200|nullable',
+            'customer.city'          => 'string|max:100|nullable',
+            'customer.state'         => 'string|max:100|nullable',
+            'customer.country'       => 'string|max:10|nullable',
+            'customer.zip'           => 'string|max:100|nullable',
+            'metadata'               => ['array', 'max:10', 'nullable'],
+            'metadata.*'             => ['string'],
             'method'                 => ['required', 'string', new ValidatePayoutMethod()],
         ];
     }
@@ -64,7 +65,7 @@ class Payout extends Moneroo
         ]);
 
         if ($validator->fails()) {
-            throw new InvalidPayloadException($validator->errors()->first());
+            throw new InvalidPayloadException(implode(', ', $validator->errors()->all()));
         }
     }
 }

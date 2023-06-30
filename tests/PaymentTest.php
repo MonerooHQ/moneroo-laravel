@@ -1,6 +1,6 @@
 <?php
 
-namespace AxaZara\Moneroo\Tests;
+namespace Moneroo\Tests;
 
 use Illuminate\Support\Facades\Config;
 

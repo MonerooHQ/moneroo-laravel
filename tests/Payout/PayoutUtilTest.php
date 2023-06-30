@@ -1,8 +1,9 @@
 <?php
 
-namespace AxaZara\Moneroo\Tests;
+namespace Moneroo\Tests\Payout;
 
-use AxaZara\Moneroo\Utils\PayoutUtil;
+use Moneroo\Tests\TestCase;
+use Moneroo\Utils\PayoutUtil;
 
 class PayoutUtilTest extends TestCase
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace AxaZara\Moneroo\Tests;
+namespace Moneroo\Tests;
 
-use AxaZara\Moneroo\Providers\MonerooServiceProvider;
 use Illuminate\Foundation\Testing\WithFaker;
+use Moneroo\Providers\MonerooServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra

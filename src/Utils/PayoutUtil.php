@@ -1,6 +1,6 @@
 <?php
 
-namespace AxaZara\Moneroo\Utils;
+namespace Moneroo\Utils;
 
 class PayoutUtil
 {
@@ -15,8 +15,8 @@ class PayoutUtil
                 'fields'        => [
                     [
                         'type'       => 'integer',
-                        'name'       => 'phone',
-                        'validation' => 'required|numeric|starts_with:229|digits:11',
+                        'name'       => 'momo_number',
+                        'validation' => 'required|integer|starts_with:229|digits:11',
                     ],
                 ],
             ],
@@ -28,8 +28,21 @@ class PayoutUtil
                 'fields'        => [
                     [
                         'type'       => 'integer',
-                        'name'       => 'phone',
-                        'validation' => 'required|numeric|starts_with:229|digits:11',
+                        'name'       => 'momo_number',
+                        'validation' => 'required|integer|starts_with:229|digits:11',
+                    ],
+                ],
+            ],
+            'moneroo_payout_demo' => [
+                'currency'           => 'USD',
+                'countries'          => ['US'],
+                'min_amount'         => 1,
+                'max_amount'         => 200000,
+                'fields'             => [
+                    [
+                        'type'       => 'string',
+                        'name'       => 'account_number',
+                        'validation' => 'required|integer|starts_with:229,233,225|min_digits:11|max_digits:13',
                     ],
                 ],
             ],
@@ -47,15 +60,15 @@ class PayoutUtil
             ->toArray();
     }
 
-    public static function getMethodFieldsValidationRules(string $method): array
+    public static function getMethodFieldsValidationRules(string $methodCode): array
     {
-        $methods = self::getMethods()[$method];
+        $method = self::getMethods()[$methodCode];
 
-        if (! $methods) {
-            throw new \RuntimeException("Payout method '$method' does not exist.");
+        if (! $method) {
+            throw new \RuntimeException("Payout method '$methodCode' does not exist.");
         }
 
-        $fields = $methods['fields'];
+        $fields = $method['fields'];
 
         return collect($fields)->mapWithKeys(function ($field) {
             return [$field['name'] => $field['validation']];
