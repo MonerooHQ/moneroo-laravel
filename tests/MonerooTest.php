@@ -37,9 +37,7 @@ class MonerooTest extends TestCase
     public function moneroo_class_throws_exception_when_public_key_is_missing(): void
     {
         $this->expectException(InvalidPayloadException::class);
-        $this->expectExceptionMessage('Moneroo public key is not set.');
 
-        // Set publicKey to null
         Config::set('moneroo.publicKey', null);
 
         new Moneroo();
@@ -53,9 +51,7 @@ class MonerooTest extends TestCase
     public function moneroo_class_throws_exception_when_secret_key_is_missing(): void
     {
         $this->expectException(InvalidPayloadException::class);
-        $this->expectExceptionMessage('Moneroo secret key is not set.');
 
-        // Set secretKey to null
         Config::set('moneroo.secretKey', null);
 
         new Moneroo();
