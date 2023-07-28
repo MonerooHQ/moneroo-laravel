@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Http;
 use Moneroo\Exceptions\InvalidPayloadException;
 use Moneroo\Payout;
 use Moneroo\Tests\TestCase;
-use Moneroo\Utils\PayoutUtil;
 
 class PayoutTest extends TestCase
 {
@@ -38,8 +37,6 @@ class PayoutTest extends TestCase
 
         $methodCode = 'moneroo_payout_demo';
 
-        $method = PayoutUtil::getMethods()[$methodCode];
-
         Http::fake([
             'https://api.moneroo.io/v1/payouts/initialize' => Http::response([
                 'success' => true,
@@ -51,7 +48,7 @@ class PayoutTest extends TestCase
 
         $payoutData = [
             'amount'      => 100,
-            'currency'    => $method['currency'],
+            'currency'    => $this->faker->currencyCode(),
             'description' => 'Test payout',
             'customer'    => [
                 'email'      => $this->faker->email(),

@@ -2,9 +2,6 @@
 
 namespace Moneroo;
 
-use Moneroo\Rules\Payment\ValidatePaymentCurrencyExists;
-use Moneroo\Rules\Payment\ValidatePaymentMethods;
-
 class Payment extends Moneroo
 {
     public function create(array $data): object
@@ -33,7 +30,7 @@ class Payment extends Moneroo
     {
         return [
             'amount'                 => 'required|numeric|gt:0',
-            'currency'               => ['required', 'string', new ValidatePaymentCurrencyExists()],
+            'currency'               => ['required', 'string'],
             'description'            => ['string', 'required', 'max:155'],
             'customer'               => 'required|array',
             'customer.*'             => 'string',
@@ -48,7 +45,8 @@ class Payment extends Moneroo
             'customer.zip'           => 'string|max:100|nullable',
             'metadata'               => ['array', 'max:10', 'nullable'],
             'metadata.*'             => ['string'],
-            'methods'                => ['nullable', 'array', new ValidatePaymentMethods()],
+            'methods'                => ['nullable', 'array'],
+            'methods.*'              => ['string'],
         ];
     }
 }

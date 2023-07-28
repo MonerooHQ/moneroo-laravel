@@ -2,19 +2,11 @@
 
 namespace Moneroo;
 
-use Illuminate\Support\Facades\Validator;
-use Moneroo\Exceptions\InvalidPayloadException;
-use Moneroo\Rules\Payout\ValidatePayoutCurrencyExists;
-use Moneroo\Rules\Payout\ValidatePayoutMethod;
-use Moneroo\Utils\PayoutUtil;
-
 class Payout extends Moneroo
 {
     public function create(array $data): object
     {
         $this->validateData($data, $this->payoutValidationRules());
-
-        $this->validatePayoutMethodRequiredFields($data);
 
         return $this->sendRequest('post', $data, '/payouts/initialize');
     }
@@ -33,7 +25,7 @@ class Payout extends Moneroo
     {
         return [
             'amount'                 => 'required|numeric|gt:0',
-            'currency'               => ['required', 'string', new ValidatePayoutCurrencyExists()],
+            'currency'               => ['required', 'string'],
             'description'            => ['string', 'required', 'max:155'],
             'customer'               => 'required|array',
             'customer.*'             => 'string',
@@ -48,24 +40,7 @@ class Payout extends Moneroo
             'customer.zip'           => 'string|max:100|nullable',
             'metadata'               => ['array', 'max:10', 'nullable'],
             'metadata.*'             => ['string'],
-            'method'                 => ['required', 'string', new ValidatePayoutMethod()],
+            'method'                 => ['required', 'string'],
         ];
-    }
-
-    private function validatePayoutMethodRequiredFields(array $data): void
-    {
-        if (! isset($data['method'])) {
-            throw new InvalidPayloadException('Payout method is required.');
-        }
-
-        $validationRules = PayoutUtil::getMethodFieldsValidationRules($data['method']);
-
-        $validator = Validator::make($data, $validationRules, [
-            'required' => 'The ":attribute" field is required for this payout method.',
-        ]);
-
-        if ($validator->fails()) {
-            throw new InvalidPayloadException(implode(', ', $validator->errors()->all()));
-        }
     }
 }
