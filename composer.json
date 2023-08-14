@@ -6,29 +6,35 @@
         "laravel",
         "moneroo",
         "moneroo.io",
-        "moneroo-laravel"
+        "moneroo-laravel",
+        "payment"
     ],
     "homepage": "https://docs.moneroo.io/",
     "license": "MIT",
     "authors": [
         {
-            "name": "Elias Elimah",
+            "name": "Axa Zara Core Dev",
             "role": "Developer"
         }
     ],
+    "contributors": [
+        {
+            "name": "Elias Elimah"
+        }
+        ],
     "require": {
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.7",
-        "illuminate/contracts": "^7.0 || ^8.0 || ^9.0 || ^10.0"
+        "illuminate/contracts": "^8.0 || ^9.0 || ^10.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.20",
+        "friendsofphp/php-cs-fixer": "^3.22",
         "insolita/unused-scanner": "^2.4",
         "nunomaduro/collision": "^6.0",
         "nunomaduro/larastan": "^2.6",
-        "orchestra/testbench": "^7.24",
+        "orchestra/testbench": "^7.25",
         "phpstan/extension-installer": "^1.3",
-        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-deprecation-rules": "^1.1",
         "phpstan/phpstan-phpunit": "^1.3",
         "phpunit/phpunit": "^9.6",
         "roave/security-advisories": "dev-latest",
@@ -48,7 +54,7 @@
         "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
         "analyse": "vendor/bin/phpstan analyse",
         "sniff": "vendor/bin/php-cs-fixer fix -vvv --dry-run --show-progress=dots",
-        "format": "vendor/bin/php-cs-fixer fix",
+        "format": "vendor/bin/php-cs-fixer fix -vv",
         "unused": "vendor/bin/unused_scanner unused-scanner.php",
         "test": [
             "Composer\\Config::disableProcessTimeout",

@@ -32,7 +32,7 @@ $rules = [
     'no_multiple_statements_per_line'         => true,
     'concat_space'                            => ['spacing' => 'one'],
     'declare_equal_normalize'                 => true,
-    'function_typehint_space'                 => true,
+    'type_declaration_spaces'                 => true,
     'include'                                 => true,
     'lowercase_cast'                          => true,
     'no_blank_lines_after_class_opening'      => true,
