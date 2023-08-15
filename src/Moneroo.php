@@ -34,7 +34,7 @@ class Moneroo
         }
     }
 
-    public function validateData(array $data, $rules): void
+    public function validateData(array $data, array $rules): void
     {
         try {
             $validator = Validator::make($data, $rules);
