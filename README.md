@@ -10,7 +10,7 @@ The Moneroo Laravel SDK provides convenient access to the Moneroo API from appli
 
 
 ## Requirements
-Laravel 7.0 or higher
+Laravel 9.0 or higher
 
 ## Documentation
 
@@ -29,9 +29,7 @@ See the Laravel SDK [documentation](https://docs.moneroo.io/).
 ```
 
 ## Notes
-- The project is based on Laravel 9.
 - The project is based on the KISS principle.
-- The project is based on the TDD principle.
 - Each time you make a change, you must run the tests and format your code.
 - Each time you make a change, you must update the documentation.
 - Each time you make a change, you must update the changelog.
