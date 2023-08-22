@@ -20,6 +20,30 @@ You can install the package via composer:
 composer require moneroo/moneroo-laravel
 ```
 
+### Configuration
+
+After you've installed the package via composer, you can run this command:
+
+```bash
+php artisan moneroo:install
+```
+
+This command will:
+
+1. Publish a `moneroo.php` file in your config directory
+2. Append your `.env` file with the `MONEROO_PUBLIC_KEY` and `MONEROO_SECRET_KEY` variables if they don't already exist.
+
+You will have to replace 'your-public-key' and 'your-secret-key' with your actual Moneroo public key and secret key respectively.
+
+```env
+MONEROO_PUBLIC_KEY=your-public-key
+MONEROO_SECRET_KEY=your-secret-key
+```
+
+Please keep in mind that these are sensitive keys and should not be publicly exposed.
+Laravel .env file is ignored by Git, which makes it a good place to store sensitive information.
+
+
 ## Documentation
 
 See the Laravel SDK [documentation](https://docs.moneroo.io/).
@@ -35,6 +59,11 @@ See the Laravel SDK [documentation](https://docs.moneroo.io/).
  composer format # Format your code with the required code style
  composer unused # check if there is an unused dependency
 ```
+
+### DEV Mode
+You can set (or add) `moneroo.devMode` to `true` in your `config/moneroo.php` file to enable the dev mode.
+After enabling the dev mode, you can set `moneroo.devBaseUrl` to customize the base URL of the Moneroo API you want to use.
+In dev mode, the SDK will use the `moneroo.devBaseUrl` instead of the default base URL `https://api.moneroo.io`.
 
 ## Notes
 - The project is based on the KISS principle.
