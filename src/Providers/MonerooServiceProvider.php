@@ -13,8 +13,8 @@ class MonerooServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        require_once __DIR__ . '/../Helper/monerooPayment.php';
-        require_once __DIR__ . '/../Helper/monerooPayout.php';
+        require_once __DIR__ . '/../Helpers/monerooPayment.php';
+        require_once __DIR__ . '/../Helpers/monerooPayout.php';
 
         $this->app->bind('moneroo', function () {
             return new Moneroo();
