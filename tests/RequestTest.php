@@ -35,8 +35,8 @@ class RequestTest extends TestCase
         Http::fake([
             'https://api.moneroo.io/v1/test' => Http::response([
                 'success' => true,
-                'data'    => [
-                    'id'           => 1,
+                'data' => [
+                    'id' => 1,
                 ],
             ]),
         ]);
@@ -64,8 +64,8 @@ class RequestTest extends TestCase
         Http::fake([
             'https://api.moneroo.io/v1/test' => Http::response([
                 'success' => false,
-                'data'    => [
-                    'id'           => 1,
+                'data' => [
+                    'id' => 1,
                 ],
             ], 401),
         ]);
@@ -87,8 +87,8 @@ class RequestTest extends TestCase
         Http::fake([
             'https://api.moneroo.io/v1/test' => Http::response([
                 'success' => false,
-                'data'    => [
-                    'id'           => 1,
+                'data' => [
+                    'id' => 1,
                 ],
             ], 403),
         ]);
@@ -110,8 +110,8 @@ class RequestTest extends TestCase
         Http::fake([
             'https://api.moneroo.io/v1/test' => Http::response([
                 'success' => false,
-                'data'    => [
-                    'id'           => 1,
+                'data' => [
+                    'id' => 1,
                 ],
             ], 404),
         ]);
@@ -133,14 +133,14 @@ class RequestTest extends TestCase
         Http::fake([
             'https://api.moneroo.io/v1/test' => Http::response([
                 'success' => false,
-                'data'    => [
-                    'id'           => 1,
+                'data' => [
+                    'id' => 1,
                 ],
             ], 400),
             'https://api.moneroo.io/v1/test-2' => Http::response([
                 'success' => false,
-                'data'    => [
-                    'id'           => 1,
+                'data' => [
+                    'id' => 1,
                 ],
             ], 422),
         ]);
@@ -164,8 +164,8 @@ class RequestTest extends TestCase
         Http::fake([
             'https://api.moneroo.io/v1/test' => Http::response([
                 'success' => false,
-                'data'    => [
-                    'id'           => 1,
+                'data' => [
+                    'id' => 1,
                 ],
             ], 406),
         ]);
@@ -187,8 +187,8 @@ class RequestTest extends TestCase
         Http::fake([
             'https://api.moneroo.io/v1/test' => Http::response([
                 'success' => false,
-                'data'    => [
-                    'id'           => 1,
+                'data' => [
+                    'id' => 1,
                 ],
             ], 500),
         ]);
