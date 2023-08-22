@@ -21,7 +21,7 @@ trait Request
         try {
             $request = Http::asJson()
                 ->acceptJson()
-                ->withUserAgent('Moneroo Laravel SDK v'.Config::VERSION)
+                ->withUserAgent('Moneroo Laravel SDK v' . Config::VERSION)
                 ->timeout(Config::TIMEOUT)
                 ->withToken($this->secretKey, 'Bearer')
                 ->baseUrl($this->baseUrl)
@@ -50,20 +50,20 @@ trait Request
             case 200:
                 return $payload->data ?? $payload;
             case 401:
-                throw new UnauthorizedException($payload->message ?? 'Unauthorized, Status Code: '.$request->getStatusCode());
+                throw new UnauthorizedException($payload->message ?? 'Unauthorized, Status Code: ' . $request->getStatusCode());
             case 403:
-                throw new ForbiddenException($payload->message ?? 'Forbidden, Status Code: '.$request->getStatusCode());
+                throw new ForbiddenException($payload->message ?? 'Forbidden, Status Code: ' . $request->getStatusCode());
             case 404:
-                throw new InvalidResourceException($payload->message ?? 'Not Found, Status Code: '.$request->getStatusCode());
+                throw new InvalidResourceException($payload->message ?? 'Not Found, Status Code: ' . $request->getStatusCode());
             case 400:
             case 422:
-                throw new InvalidPayloadException($payload->message ?? 'Invalid Payload, Status Code: '.$request->getStatusCode());
+                throw new InvalidPayloadException($payload->message ?? 'Invalid Payload, Status Code: ' . $request->getStatusCode());
             case 406:
-                throw new NotAcceptableException($payload->message ?? 'Not Acceptable, Status Code: '.$request->getStatusCode());
+                throw new NotAcceptableException($payload->message ?? 'Not Acceptable, Status Code: ' . $request->getStatusCode());
             case 503:
-                throw new ServiceUnavailableException($payload->message ?? 'Service Unavailable, Status Code: '.$request->getStatusCode());
+                throw new ServiceUnavailableException($payload->message ?? 'Service Unavailable, Status Code: ' . $request->getStatusCode());
             default:
-                throw new ServerErrorException($payload->message ?? 'Server Error, Status Code: '.$request->getStatusCode());
+                throw new ServerErrorException($payload->message ?? 'Server Error, Status Code: ' . $request->getStatusCode());
         }
     }
 }

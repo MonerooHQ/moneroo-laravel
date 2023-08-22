@@ -32,20 +32,20 @@ class PaymentTest extends TestCase
         Http::fake([
             'https://api.moneroo.io/v1/payments/initialize' => Http::response([
                 'success' => true,
-                'data' => [
+                'data'    => [
                     'id' => 1,
                 ],
             ]),
         ]);
 
         $paymentData = [
-            'amount' => 100,
-            'currency' => 'XOF',
+            'amount'      => 100,
+            'currency'    => 'XOF',
             'description' => 'Test payment',
-            'customer' => [
-                'email' => $this->faker->email(),
+            'customer'    => [
+                'email'      => $this->faker->email(),
                 'first_name' => $this->faker->firstName(),
-                'last_name' => $this->faker->lastName(),
+                'last_name'  => $this->faker->lastName(),
             ],
             'return_url' => 'https://example.com/return',
         ];

@@ -12,14 +12,17 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest, windows-latest]
-        php: [8.2, 8.1]
-        laravel: [10.*]
-        stability: [prefer-lowest, prefer-stable]
+        os: [ ubuntu-latest, windows-latest ]
+        php: [ 8.2, 8.1 ]
+        laravel: [ 10.*, 8.* ]
+        stability: [ prefer-lowest, prefer-stable ]
         include:
           - laravel: 10.*
             testbench: 8.*
             carbon: ^2.63
+          - laravel: 8.*
+            testbench: 6.*
+            carbon: ^2.39
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -48,4 +51,4 @@ jobs:
         run: composer show -D
 
       - name: Execute tests
-        run: vendor/bin/pest --ci
+        run: vendor/bin/phpunit  --configuration phpunit.xml.dist

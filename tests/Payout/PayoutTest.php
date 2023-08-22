@@ -40,22 +40,22 @@ class PayoutTest extends TestCase
         Http::fake([
             'https://api.moneroo.io/v1/payouts/initialize' => Http::response([
                 'success' => true,
-                'data' => [
+                'data'    => [
                     'id' => 1,
                 ],
             ]),
         ]);
 
         $payoutData = [
-            'amount' => 100,
-            'currency' => $this->faker->currencyCode(),
+            'amount'      => 100,
+            'currency'    => $this->faker->currencyCode(),
             'description' => 'Test payout',
-            'customer' => [
-                'email' => $this->faker->email(),
+            'customer'    => [
+                'email'      => $this->faker->email(),
                 'first_name' => $this->faker->firstName(),
-                'last_name' => $this->faker->lastName(),
+                'last_name'  => $this->faker->lastName(),
             ],
-            'method' => $methodCode,
+            'method'         => $methodCode,
             'account_number' => $this->faker->randomElement($testAccountNumber),
         ];
 

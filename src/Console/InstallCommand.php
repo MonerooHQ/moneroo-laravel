@@ -49,7 +49,7 @@ class InstallCommand extends Command
     {
         $params = [
             '--provider' => MonerooServiceProvider::class,
-            '--tag' => 'config',
+            '--tag'      => 'config',
         ];
 
         if ($forcePublish === true) {
@@ -70,7 +70,7 @@ class InstallCommand extends Command
             if (! Str::contains($contents, 'MONEROO_PUBLIC_KEY=')) {
                 File::append(
                     $env,
-                    PHP_EOL.'MONEROO_PUBLIC_KEY='.'your-public-key'.PHP_EOL,
+                    PHP_EOL . 'MONEROO_PUBLIC_KEY=' . 'your-public-key' . PHP_EOL,
                 );
                 $this->info('Added MONEROO_PUBLIC_KEY to your .env file');
                 $this->info('Please update the value with your Moneroo Public Key');
@@ -81,7 +81,7 @@ class InstallCommand extends Command
             if (! Str::contains($contents, 'MONEROO_SECRET_KEY=')) {
                 File::append(
                     $env,
-                    PHP_EOL.'MONEROO_SECRET_KEY='.'your-secret-key'.PHP_EOL,
+                    PHP_EOL . 'MONEROO_SECRET_KEY=' . 'your-secret-key' . PHP_EOL,
                 );
                 $this->info('Added MONEROO_SECRET_KEY to your .env file');
                 $this->info('Please update the value with your Moneroo Secret Key');

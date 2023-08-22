@@ -13,8 +13,8 @@ class MonerooServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        require_once __DIR__.'/../Helpers/monerooPayment.php';
-        require_once __DIR__.'/../Helpers/monerooPayout.php';
+        require_once __DIR__ . '/../Helpers/monerooPayment.php';
+        require_once __DIR__ . '/../Helpers/monerooPayout.php';
 
         $this->app->bind('moneroo', function () {
             return new Moneroo();
@@ -36,7 +36,7 @@ class MonerooServiceProvider extends ServiceProvider
                 Console\InstallCommand::class,
             ]);
             $this->publishes([
-                __DIR__.'/../../config/moneroo-laravel.php' => config_path('moneroo.php'),
+                __DIR__ . '/../../config/moneroo-laravel.php' => config_path('moneroo.php'),
             ], 'config');
         }
 
