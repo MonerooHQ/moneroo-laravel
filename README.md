@@ -12,6 +12,14 @@ The Moneroo Laravel SDK provides convenient access to the Moneroo API from appli
 ## Requirements
 Laravel 9.0 or higher
 
+## Installation
+
+You can install the package via composer:
+
+```shell
+composer require moneroo/moneroo-laravel
+```
+
 ## Documentation
 
 See the Laravel SDK [documentation](https://docs.moneroo.io/).
