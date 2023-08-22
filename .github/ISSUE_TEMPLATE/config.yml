@@ -1,8 +1,6 @@
 blank_issues_enabled: false
 name: Issue Template
 description: Template for creating issues
-body:
-  -
 contact_links:
   - name: Ask a question
     url: https://github.com/moneroohq/moneroo-laravel/discussions/new?category=q-a
