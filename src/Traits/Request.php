@@ -48,7 +48,7 @@ trait Request
      */
     private function decodePayload($request): object
     {
-        return json_decode($request->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR);
+        return json_decode($request->body(), false, 512, JSON_THROW_ON_ERROR);
     }
 
     private function processResponse(object $payload, $request)
