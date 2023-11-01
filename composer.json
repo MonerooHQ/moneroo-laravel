@@ -43,12 +43,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Moneroo\\": "src"
+            "Moneroo\\Laravel\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Moneroo\\Tests\\": "tests"
+            "Moneroo\\Laravel\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -72,11 +72,11 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Moneroo\\Providers\\MonerooServiceProvider"
+                "Moneroo\\Laravel\\Providers\\MonerooServiceProvider"
             ],
             "aliases": {
-                "MonerooPayment": "Moneroo\\Facades\\PaymentFacade",
-                "MonerooPayout": "Moneroo\\Facades\\PayoutFacade"
+                "MonerooPayment": "Moneroo\\Laravel\\Facades\\PaymentFacade",
+                "MonerooPayout": "Moneroo\\Laravel\\Facades\\PayoutFacade"
             }
         }
     },

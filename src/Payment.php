@@ -1,6 +1,6 @@
 <?php
 
-namespace Moneroo;
+namespace Moneroo\Laravel;
 
 final class Payment extends Moneroo
 {
@@ -77,7 +77,11 @@ final class Payment extends Moneroo
             'customer.country'    => 'string|max:10|nullable',
             'customer.zip'        => 'string|max:100|nullable',
             'metadata'            => ['array', 'max:10', 'nullable'],
-            'metadata.*'          => ['max:100', 'string', 'integer', 'boolean', 'nullable'],
+            'metadata.*'          => ['max:100', function ($attribute, $value, $fail) {
+                if (! is_string($value) && ! is_bool($value) && ! is_int($value)) {
+                    $fail('The :attribute must be a string, boolean or integer.');
+                }
+            }],
             'methods'             => ['nullable', 'array'],
             'methods.*'           => ['string'],
         ];

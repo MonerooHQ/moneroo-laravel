@@ -1,18 +1,18 @@
 <?php
 
-namespace Moneroo\Traits;
+namespace Moneroo\Laravel\Traits;
 
 use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Support\Facades\Http;
 use JsonException;
-use Moneroo\Config;
-use Moneroo\Exceptions\ForbiddenException;
-use Moneroo\Exceptions\InvalidPayloadException;
-use Moneroo\Exceptions\InvalidResourceException;
-use Moneroo\Exceptions\NotAcceptableException;
-use Moneroo\Exceptions\ServerErrorException;
-use Moneroo\Exceptions\ServiceUnavailableException;
-use Moneroo\Exceptions\UnauthorizedException;
+use Moneroo\Laravel\Config;
+use Moneroo\Laravel\Exceptions\ForbiddenException;
+use Moneroo\Laravel\Exceptions\InvalidPayloadException;
+use Moneroo\Laravel\Exceptions\InvalidResourceException;
+use Moneroo\Laravel\Exceptions\NotAcceptableException;
+use Moneroo\Laravel\Exceptions\ServerErrorException;
+use Moneroo\Laravel\Exceptions\ServiceUnavailableException;
+use Moneroo\Laravel\Exceptions\UnauthorizedException;
 
 trait Request
 {

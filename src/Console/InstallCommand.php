@@ -1,11 +1,11 @@
 <?php
 
-namespace Moneroo\Console;
+namespace Moneroo\Laravel\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use Moneroo\Providers\MonerooServiceProvider;
+use Moneroo\Laravel\Providers\MonerooServiceProvider;
 
 final class InstallCommand extends Command
 {

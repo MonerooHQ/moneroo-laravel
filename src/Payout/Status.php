@@ -1,6 +1,6 @@
 <?php
 
-namespace Moneroo\Payout;
+namespace Moneroo\Laravel\Payout;
 
 enum Status: string
 {

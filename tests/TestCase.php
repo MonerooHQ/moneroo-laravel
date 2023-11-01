@@ -1,9 +1,9 @@
 <?php
 
-namespace Moneroo\Tests;
+namespace Moneroo\Laravel\Tests;
 
 use Illuminate\Foundation\Testing\WithFaker;
-use Moneroo\Providers\MonerooServiceProvider;
+use Moneroo\Laravel\Providers\MonerooServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra

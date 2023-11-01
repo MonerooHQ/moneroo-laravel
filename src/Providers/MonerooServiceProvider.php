@@ -1,13 +1,13 @@
 <?php
 
-namespace Moneroo\Providers;
+namespace Moneroo\Laravel\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Moneroo\Console;
-use Moneroo\Facades;
-use Moneroo\Moneroo;
-use Moneroo\Payment;
-use Moneroo\Payout;
+use Moneroo\Laravel\Console;
+use Moneroo\Laravel\Facades;
+use Moneroo\Laravel\Moneroo;
+use Moneroo\Laravel\Payment;
+use Moneroo\Laravel\Payout;
 
 class MonerooServiceProvider extends ServiceProvider
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Moneroo\Tests;
+namespace Moneroo\Laravel\Tests;
 
 use Illuminate\Support\Facades\Config;
-use Moneroo\Exceptions\InvalidPayloadException;
-use Moneroo\Moneroo;
+use Moneroo\Laravel\Exceptions\InvalidPayloadException;
+use Moneroo\Laravel\Moneroo;
 
 class MonerooTest extends TestCase
 {

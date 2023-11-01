@@ -1,6 +1,6 @@
 <?php
 
-use Moneroo\Payout;
+use Moneroo\Laravel\Payout;
 
 function monerooPayout(): Payout
 {

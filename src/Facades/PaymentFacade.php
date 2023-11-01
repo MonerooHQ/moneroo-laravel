@@ -1,6 +1,6 @@
 <?php
 
-namespace Moneroo\Facades;
+namespace Moneroo\Laravel\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

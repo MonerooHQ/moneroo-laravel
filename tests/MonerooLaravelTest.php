@@ -1,6 +1,6 @@
 <?php
 
-namespace Moneroo\Tests;
+namespace Moneroo\Laravel\Tests;
 
 use Illuminate\Support\Facades\Bus;
 

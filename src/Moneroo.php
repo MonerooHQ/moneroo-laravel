@@ -1,10 +1,10 @@
 <?php
 
-namespace Moneroo;
+namespace Moneroo\Laravel;
 
 use Exception;
 use Illuminate\Support\Facades\Validator;
-use Moneroo\Exceptions\InvalidPayloadException;
+use Moneroo\Laravel\Exceptions\InvalidPayloadException;
 
 class Moneroo
 {

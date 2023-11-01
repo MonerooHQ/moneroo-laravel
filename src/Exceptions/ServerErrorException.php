@@ -1,6 +1,6 @@
 <?php
 
-namespace Moneroo\Exceptions;
+namespace Moneroo\Laravel\Exceptions;
 
 use RuntimeException;
 

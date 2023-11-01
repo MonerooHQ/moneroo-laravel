@@ -1,6 +1,6 @@
 <?php
 
-namespace Moneroo;
+namespace Moneroo\Laravel;
 
 final class Config
 {

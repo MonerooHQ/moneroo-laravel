@@ -1,18 +1,18 @@
 <?php
 
-namespace Moneroo\Tests;
+namespace Moneroo\Laravel\Tests;
 
 use Illuminate\Http\Client\Events\RequestSending;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
-use Moneroo\Exceptions\ForbiddenException;
-use Moneroo\Exceptions\InvalidPayloadException;
-use Moneroo\Exceptions\InvalidResourceException;
-use Moneroo\Exceptions\NotAcceptableException;
-use Moneroo\Exceptions\ServerErrorException;
-use Moneroo\Exceptions\UnauthorizedException;
-use Moneroo\Moneroo;
+use Moneroo\Laravel\Exceptions\ForbiddenException;
+use Moneroo\Laravel\Exceptions\InvalidPayloadException;
+use Moneroo\Laravel\Exceptions\InvalidResourceException;
+use Moneroo\Laravel\Exceptions\NotAcceptableException;
+use Moneroo\Laravel\Exceptions\ServerErrorException;
+use Moneroo\Laravel\Exceptions\UnauthorizedException;
+use Moneroo\Laravel\Moneroo;
 
 class RequestTest extends TestCase
 {

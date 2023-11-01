@@ -1,13 +1,13 @@
 <?php
 
-namespace Moneroo\Tests\Payment;
+namespace Moneroo\Laravel\Tests\Payment;
 
 use Illuminate\Http\Client\Events\RequestSending;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
-use Moneroo\Exceptions\InvalidPayloadException;
-use Moneroo\Payment;
-use Moneroo\Tests\TestCase;
+use Moneroo\Laravel\Exceptions\InvalidPayloadException;
+use Moneroo\Laravel\Payment;
+use Moneroo\Laravel\Tests\TestCase;
 
 class PaymentTest extends TestCase
 {
