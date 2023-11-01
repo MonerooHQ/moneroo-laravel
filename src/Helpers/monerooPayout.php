@@ -4,5 +4,5 @@ use Moneroo\Laravel\Payout;
 
 function monerooPayout(): Payout
 {
-    return new Moneroo\Payout();
+    return new Moneroo\Laravel\Payout();
 }
