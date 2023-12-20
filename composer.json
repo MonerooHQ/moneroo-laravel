@@ -29,10 +29,10 @@
         "illuminate/contracts": "^9.0 || ^10.0"
     },
     "require-dev": {
-        "axazara/php-cs": "^1.0",
+        "axazara/php-cs": "^0.1",
         "insolita/unused-scanner": "^2.4",
         "nunomaduro/collision": "^6.0",
-        "nunomaduro/larastan": "^2.6",
+        "larastan/larastan": "^2.6",
         "orchestra/testbench": "^7.29",
         "phpstan/extension-installer": "^1.3",
         "phpstan/phpstan-deprecation-rules": "^1.1",
