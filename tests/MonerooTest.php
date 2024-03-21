@@ -30,20 +30,6 @@ class MonerooTest extends TestCase
     }
 
     /**
-     * Moneroo::__construct() should throw an InvalidPayloadException when no public key is provided.
-     *
-     * @test
-     */
-    public function moneroo_class_throws_exception_when_public_key_is_missing(): void
-    {
-        $this->expectException(InvalidPayloadException::class);
-
-        Config::set('moneroo.publicKey', null);
-
-        new Moneroo();
-    }
-
-    /**
      * Moneroo::__construct() should throw an InvalidPayloadException when no secret key is provided.
      *
      * @test

@@ -19,7 +19,6 @@ class RequestTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        Config::set('moneroo.publicKey', 'testPublicKey');
         Config::set('moneroo.secretKey', 'testSecretKey');
     }
 

@@ -29,7 +29,6 @@ trait Request
         try {
             $request = Http::asJson()
                 ->acceptJson()
-                ->throw()
                 ->withUserAgent(userAgent: 'Moneroo Laravel SDK v' . Config::VERSION)
                 ->timeout(seconds: Config::TIMEOUT)
                 ->withToken(token: $this->secretKey, type: 'Bearer')
