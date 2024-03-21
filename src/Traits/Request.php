@@ -29,10 +29,11 @@ trait Request
         try {
             $request = Http::asJson()
                 ->acceptJson()
-                ->withUserAgent('Moneroo Laravel SDK v' . Config::VERSION)
-                ->timeout(Config::TIMEOUT)
-                ->withToken($this->secretKey, 'Bearer')
-                ->baseUrl($this->baseUrl)
+                ->throw()
+                ->withUserAgent(userAgent: 'Moneroo Laravel SDK v' . Config::VERSION)
+                ->timeout(seconds: Config::TIMEOUT)
+                ->withToken(token: $this->secretKey, type: 'Bearer')
+                ->baseUrl(url: $this->baseUrl)
                 ->$method($endpoint, $data);
 
             $payload = $this->decodePayload($request);

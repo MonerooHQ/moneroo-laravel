@@ -15,7 +15,7 @@ final class Payment extends Moneroo
     {
         $this->validateData($data, $this->paymentValidationRules());
 
-        return $this->sendRequest('post', $data, '/payments/initialize');
+        return $this->sendRequest(method: 'post', data: $data, endpoint: '/payments/initialize');
     }
 
     /**
@@ -27,7 +27,7 @@ final class Payment extends Moneroo
      */
     public function verify(string $paymentTransactionId)
     {
-        return $this->sendRequest('get', [], '/payments/' . $paymentTransactionId . '/verify');
+        return $this->sendRequest(method: 'get', data: [], endpoint: "/payments/$paymentTransactionId/verify");
     }
 
     /**
@@ -39,7 +39,7 @@ final class Payment extends Moneroo
      */
     public function get(string $paymentTransactionId)
     {
-        return $this->sendRequest('get', [], '/payments/' . $paymentTransactionId);
+        return $this->sendRequest(method: 'get', data: [], endpoint: "/payments/$paymentTransactionId");
     }
 
     /**
@@ -53,7 +53,7 @@ final class Payment extends Moneroo
      */
     public function markAsProcessed(string $paymentTransactionId)
     {
-        return $this->sendRequest('post', [], '/payments/' . $paymentTransactionId . '/process');
+        return $this->sendRequest(method: 'post', data: [], endpoint: "/payments/$paymentTransactionId/process");
     }
 
     /**
@@ -77,11 +77,6 @@ final class Payment extends Moneroo
             'customer.country'    => 'string|max:10|nullable',
             'customer.zip'        => 'string|max:100|nullable',
             'metadata'            => ['array', 'max:10', 'nullable'],
-            'metadata.*'          => ['max:100', function ($attribute, $value, $fail) {
-                if (! is_string($value) && ! is_bool($value) && ! is_int($value)) {
-                    $fail('The :attribute must be a string, boolean or integer.');
-                }
-            }],
             'methods'             => ['nullable', 'array'],
             'methods.*'           => ['string'],
         ];

@@ -17,5 +17,5 @@ final class Config
     /**
      * The timeout of the API request.
      */
-    public const TIMEOUT = 2;
+    public const TIMEOUT = 30;
 }

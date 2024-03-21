@@ -67,17 +67,6 @@ final class InstallCommand extends Command
         if (File::exists($env = app()->environmentFile())) {
             $contents = File::get($env);
 
-            if (! Str::contains($contents, 'MONEROO_PUBLIC_KEY=')) {
-                File::append(
-                    $env,
-                    PHP_EOL . 'MONEROO_PUBLIC_KEY=' . 'your-public-key' . PHP_EOL,
-                );
-                $this->info('Added MONEROO_PUBLIC_KEY to your .env file');
-                $this->info('Please update the value with your Moneroo Public Key');
-            } else {
-                $this->info('MONEROO_PUBLIC_KEY already exists in your .env file');
-            }
-
             if (! Str::contains($contents, 'MONEROO_SECRET_KEY=')) {
                 File::append(
                     $env,

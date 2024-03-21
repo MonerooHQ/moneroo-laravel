@@ -11,11 +11,6 @@ class Moneroo
     use Traits\Request;
 
     /**
-     *  API public key.
-     */
-    protected ?string $publicKey;
-
-    /**
      *  API secret key.
      */
     protected ?string $secretKey;
@@ -27,16 +22,11 @@ class Moneroo
 
     public function __construct()
     {
-        $this->publicKey = config('moneroo.publicKey');
         $this->secretKey = config('moneroo.secretKey');
 
         $this->baseUrl = config('moneroo.devMode') === true
             ? config('moneroo.devBaseUrl')
             : Config::BASE_URL;
-
-        if (empty($this->publicKey) || ! is_string($this->publicKey)) {
-            throw new InvalidPayloadException('Moneroo public key is not set or not a string.');
-        }
 
         if (empty($this->secretKey) || ! is_string($this->secretKey)) {
             throw new InvalidPayloadException('Moneroo secret key is not set or not a string.');
