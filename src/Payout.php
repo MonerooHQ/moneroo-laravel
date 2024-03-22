@@ -62,8 +62,7 @@ final class Payout extends Moneroo
             'customer.state'           => 'string|max:100|nullable',
             'customer.country'         => 'string|max:10|nullable',
             'customer.zip'             => 'string|max:100|nullable',
-            'metadata'                 => ['array', 'nullable'],
-            'metadata.*'               => ['max:10'],
+            'metadata'                 => ['array', 'max:10', 'nullable'],
             'method'                   => ['required', 'string'],
         ];
     }
