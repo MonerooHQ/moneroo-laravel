@@ -13,8 +13,6 @@ final class Payment extends Moneroo
      */
     public function init(array $data)
     {
-        $this->validateData($data, $this->paymentValidationRules());
-
         return $this->sendRequest(method: 'post', data: $data, endpoint: '/payments/initialize');
     }
 
@@ -54,31 +52,5 @@ final class Payment extends Moneroo
     public function markAsProcessed(string $paymentTransactionId)
     {
         return $this->sendRequest(method: 'post', data: [], endpoint: "/payments/$paymentTransactionId/process");
-    }
-
-    /**
-     * Payment validation rules.
-     */
-    private function paymentValidationRules(): array
-    {
-        return [
-            'amount'              => 'required|numeric|gt:0',
-            'currency'            => ['required', 'string'],
-            'description'         => ['string', 'required', 'max:155'],
-            'customer'            => 'required|array',
-            'customer.*'          => 'string',
-            'customer.email'      => 'email|required',
-            'customer.first_name' => 'string|max:100|required',
-            'customer.last_name'  => 'string|max:100|required',
-            'customer.phone'      => 'integer|nullable',
-            'customer.address'    => 'string|max:200|nullable',
-            'customer.city'       => 'string|max:100|nullable',
-            'customer.state'      => 'string|max:100|nullable',
-            'customer.country'    => 'string|max:10|nullable',
-            'customer.zip'        => 'string|max:100|nullable',
-            'metadata'            => ['array', 'max:10', 'nullable'],
-            'methods'             => ['nullable', 'array'],
-            'methods.*'           => ['string'],
-        ];
     }
 }
