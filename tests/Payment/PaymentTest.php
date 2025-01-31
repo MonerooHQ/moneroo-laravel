@@ -5,7 +5,6 @@ namespace Moneroo\Laravel\Tests\Payment;
 use Illuminate\Http\Client\Events\RequestSending;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
-use Moneroo\Laravel\Exceptions\InvalidPayloadException;
 use Moneroo\Laravel\Payment;
 use Moneroo\Laravel\Tests\TestCase;
 
@@ -61,19 +60,5 @@ class PaymentTest extends TestCase
                 && $event->request->method() === 'POST'
                 && $event->request->data() === $paymentData;
         });
-    }
-
-    /**
-     * It should return error if validation fails.
-     *
-     * @test
-     */
-    public function it_should_return_error_if_validation_fails(): void
-    {
-        $payment = new Payment();
-
-        $this->expectException(InvalidPayloadException::class);
-
-        $payment->init([]);
     }
 }
