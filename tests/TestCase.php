@@ -10,16 +10,16 @@ class TestCase extends Orchestra
 {
     use WithFaker;
 
+    public function getEnvironmentSetUp($app): void
+    {
+        config()->set('database.default', 'testing');
+        config()->set('app.debug', 'true');
+    }
+
     protected function getPackageProviders($app): array
     {
         return [
             MonerooServiceProvider::class,
         ];
-    }
-
-    public function getEnvironmentSetUp($app): void
-    {
-        config()->set('database.default', 'testing');
-        config()->set('app.debug', 'true');
     }
 }

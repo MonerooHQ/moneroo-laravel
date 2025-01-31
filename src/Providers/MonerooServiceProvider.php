@@ -2,6 +2,7 @@
 
 namespace Moneroo\Laravel\Providers;
 
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Moneroo\Laravel\Console;
 use Moneroo\Laravel\Facades;
@@ -14,6 +15,7 @@ class MonerooServiceProvider extends ServiceProvider
     public function register(): void
     {
         require_once __DIR__ . '/../Helpers/monerooPayment.php';
+
         require_once __DIR__ . '/../Helpers/monerooPayout.php';
 
         $this->app->bind('moneroo', function () {
@@ -41,7 +43,7 @@ class MonerooServiceProvider extends ServiceProvider
         }
 
         $this->app->booting(function () {
-            $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+            $loader = AliasLoader::getInstance();
             $loader->alias('Moneroo', Facades\Moneroo::class);
             $loader->alias('Payment', Facades\PaymentFacade::class);
             $loader->alias('Payout', Facades\PayoutFacade::class);

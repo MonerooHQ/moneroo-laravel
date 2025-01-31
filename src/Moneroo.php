@@ -36,7 +36,7 @@ class Moneroo
     /**
      * Validate the data  with Laravel validator.
      *
-     * @param array $data  - The data to validate
+     * @param array $data - The data to validate
      * @param array $rules - The rules to validate against
      */
     public function validateData(array $data, array $rules): void

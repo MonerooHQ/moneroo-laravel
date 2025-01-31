@@ -4,6 +4,4 @@ namespace Moneroo\Laravel\Exceptions;
 
 use RuntimeException;
 
-final class ForbiddenException extends RuntimeException
-{
-}
+final class ForbiddenException extends RuntimeException {}

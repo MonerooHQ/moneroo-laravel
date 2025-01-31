@@ -20,8 +20,8 @@ trait Request
      * Send request to the API.
      * Based on Laravel HTTP Client.
      *
-     * @param string $method   - The HTTP method to use (GET, POST, PUT, PATCH, DELETE)
-     * @param array  $data     - The data to send
+     * @param string $method - The HTTP method to use (GET, POST, PUT, PATCH, DELETE)
+     * @param array $data - The data to send
      * @param string $endpoint - The API endpoint
      */
     public function sendRequest(string $method, array $data, string $endpoint)
@@ -33,7 +33,7 @@ trait Request
                 ->timeout(seconds: Config::TIMEOUT)
                 ->withToken(token: $this->secretKey, type: 'Bearer')
                 ->baseUrl(url: $this->baseUrl)
-                ->$method($endpoint, $data);
+                ->{$method}($endpoint, $data);
 
             $payload = $this->decodePayload($request);
 
@@ -57,19 +57,26 @@ trait Request
             case 201:
             case 200:
                 return $payload->data ?? $payload;
+
             case 401:
                 throw new UnauthorizedException($payload->message ?? 'Unauthorized, Status Code: ' . $request->getStatusCode());
+
             case 403:
                 throw new ForbiddenException($payload->message ?? 'Forbidden, Status Code: ' . $request->getStatusCode());
+
             case 404:
                 throw new InvalidResourceException($payload->message ?? 'Not Found, Status Code: ' . $request->getStatusCode());
+
             case 400:
             case 422:
                 throw new InvalidPayloadException($payload->message ?? 'Invalid Payload, Status Code: ' . $request->getStatusCode());
+
             case 406:
                 throw new NotAcceptableException($payload->message ?? 'Not Acceptable, Status Code: ' . $request->getStatusCode());
+
             case 503:
                 throw new ServiceUnavailableException($payload->message ?? 'Service Unavailable, Status Code: ' . $request->getStatusCode());
+
             default:
                 throw new ServerErrorException($payload->message ?? 'Server Error, Status Code: ' . $request->getStatusCode());
         }

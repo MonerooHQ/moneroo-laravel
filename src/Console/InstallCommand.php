@@ -32,6 +32,27 @@ final class InstallCommand extends Command
         $this->info('Moneroo Laravel Package installed successfully.');
     }
 
+    /**
+     * Updates the environment file with the basic configuration.
+     */
+    public function updateEnvironmentFile(): void
+    {
+        if (File::exists($env = app()->environmentFile())) {
+            $contents = File::get($env);
+
+            if (! Str::contains($contents, 'MONEROO_SECRET_KEY=')) {
+                File::append(
+                    $env,
+                    PHP_EOL . 'MONEROO_SECRET_KEY=' . 'your-secret-key' . PHP_EOL,
+                );
+                $this->info('Added MONEROO_SECRET_KEY to your .env file');
+                $this->info('Please update the value with your Moneroo Secret Key');
+            } else {
+                $this->info('MONEROO_SECRET_KEY already exists in your .env file');
+            }
+        }
+    }
+
     private function configExists(): bool
     {
         return File::exists(config_path('moneroo-laravel.php'));
@@ -57,26 +78,5 @@ final class InstallCommand extends Command
         }
         $this->call('vendor:publish', $params);
         $this->updateEnvironmentFile();
-    }
-
-    /**
-     * Updates the environment file with the basic configuration.
-     */
-    public function updateEnvironmentFile(): void
-    {
-        if (File::exists($env = app()->environmentFile())) {
-            $contents = File::get($env);
-
-            if (! Str::contains($contents, 'MONEROO_SECRET_KEY=')) {
-                File::append(
-                    $env,
-                    PHP_EOL . 'MONEROO_SECRET_KEY=' . 'your-secret-key' . PHP_EOL,
-                );
-                $this->info('Added MONEROO_SECRET_KEY to your .env file');
-                $this->info('Please update the value with your Moneroo Secret Key');
-            } else {
-                $this->info('MONEROO_SECRET_KEY already exists in your .env file');
-            }
-        }
     }
 }
