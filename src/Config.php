@@ -7,7 +7,7 @@ final class Config
     /**
      * The version of the package.
      */
-    public const VERSION = '1.0.0';
+    public const VERSION = 'v0.1.2';
 
     /**
      * The base URL of the API.
