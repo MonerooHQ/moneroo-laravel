@@ -13,8 +13,6 @@ final class Payout extends Moneroo
      */
     public function init(array $data)
     {
-        $this->validateData($data, $this->payoutValidationRules());
-
         return $this->sendRequest('post', $data, '/payouts/initialize');
     }
 
@@ -40,30 +38,5 @@ final class Payout extends Moneroo
     public function get(string $payoutTransactionId)
     {
         return $this->sendRequest('get', [], '/payouts/' . $payoutTransactionId);
-    }
-
-    /**
-     * Payout validation rules.
-     */
-    private function payoutValidationRules(): array
-    {
-        return [
-            'amount'                   => 'required|numeric|gt:0',
-            'currency'                 => ['required', 'string'],
-            'description'              => ['string', 'required', 'max:155'],
-            'customer'                 => 'required|array',
-            'customer.*'               => 'string',
-            'customer.email'           => 'email|required',
-            'customer.first_name'      => 'string|max:100|required',
-            'customer.last_name'       => 'string|max:100|required',
-            'customer.phone'           => 'integer|nullable',
-            'customer.address'         => 'string|max:200|nullable',
-            'customer.city'            => 'string|max:100|nullable',
-            'customer.state'           => 'string|max:100|nullable',
-            'customer.country'         => 'string|max:10|nullable',
-            'customer.zip'             => 'string|max:100|nullable',
-            'metadata'                 => ['array', 'max:10', 'nullable'],
-            'method'                   => ['required', 'string'],
-        ];
     }
 }
