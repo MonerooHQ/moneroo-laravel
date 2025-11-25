@@ -10,6 +10,13 @@ class TestCase extends Orchestra
 {
     use WithFaker;
 
+    /**
+     * The last response returned by the application.
+     *
+     * @var \Illuminate\Testing\TestResponse|null
+     */
+    protected static $latestResponse;
+
     public function getEnvironmentSetUp($app): void
     {
         config()->set('database.default', 'testing');
