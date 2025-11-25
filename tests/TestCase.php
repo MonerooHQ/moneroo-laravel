@@ -3,12 +3,20 @@
 namespace Moneroo\Laravel\Tests;
 
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Testing\TestResponse;
 use Moneroo\Laravel\Providers\MonerooServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
     use WithFaker;
+
+    /**
+     * The last response returned by the application.
+     *
+     * @var null|TestResponse
+     */
+    public static $latestResponse;
 
     public function getEnvironmentSetUp($app): void
     {
