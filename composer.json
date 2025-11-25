@@ -30,7 +30,6 @@
     },
     "require-dev": {
         "axazara/php-cs": "^0.3",
-        "insolita/unused-scanner": "^2.4",
         "nunomaduro/collision": "^6.0 || ^7.0 || ^8.0",
         "larastan/larastan": "^2.9",
         "orchestra/testbench": "^7.40 || ^8.0 || ^9.0 || ^10.0",
@@ -55,7 +54,6 @@
         "analyse": "vendor/bin/phpstan analyse",
         "sniff": "vendor/bin/php-cs-fixer fix -vvv --dry-run --show-progress=dots",
         "format": "vendor/bin/php-cs-fixer fix -vv",
-        "unused": "vendor/bin/unused_scanner unused-scanner.php",
         "test": [
             "Composer\\Config::disableProcessTimeout",
             "vendor/bin/phpunit --testdox"
