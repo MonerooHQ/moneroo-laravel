@@ -2,6 +2,68 @@
 
 Guidance for Claude Code and other AI agents working in this repository.
 
+## Project overview
+
+This is the official Laravel SDK for the Moneroo payment API, targeting African mobile-money and card payments. It is a Composer package (`moneroo/moneroo-laravel`) that wraps the Moneroo REST API (`https://api.moneroo.io/v1`) and is consumed by Laravel applications that need to initialize/verify payments and payouts. Requires PHP 8.1+ and Laravel 9–12.
+
+## Tech stack
+
+- PHP ^8.1
+- Laravel (illuminate/contracts) ^9.0 || ^10.0 || ^11.0 || ^12.0
+- GuzzleHTTP ^7.7 (underlying HTTP transport via Laravel's Http facade)
+- PHPUnit ^9.6 / ^10.5 / ^11.0 (test runner via Orchestra Testbench)
+- Larastan ^2.9 / ^3.0 (PHPStan level 4 static analysis)
+- axazara/php-cs (php-cs-fixer ruleset for code style)
+
+## Getting started
+
+```bash
+composer install
+
+# In a host Laravel app — install config and env stubs:
+php artisan moneroo:install
+```
+
+Set credentials in `.env`:
+
+```
+MONEROO_SECRET_KEY=your-secret-key
+```
+
+To point the SDK at a local/staging API, set `moneroo.devMode = true` and `moneroo.devBaseUrl` in `config/moneroo.php`.
+
+## Common commands
+
+| Task | Command |
+|---|---|
+| Test | `composer test` |
+| Lint (dry-run) | `composer sniff` |
+| Format | `composer format` |
+| Static analysis | `composer analyse` |
+
+## Architecture
+
+All source lives under `src/`:
+
+- `Moneroo.php` — base class; reads config, validates credentials, provides `validateData()` using Laravel's Validator.
+- `Payment.php` / `Payout.php` — final classes extending `Moneroo`; expose `init()`, `verify()`, `get()`, and (Payment-only) `markAsProcessed()`.
+- `Traits/Request.php` — `sendRequest()` trait using Laravel's `Http` facade; maps HTTP status codes to typed exceptions.
+- `Facades/PaymentFacade.php` / `PayoutFacade.php` — Laravel facade aliases `MonerooPayment` and `MonerooPayout`.
+- `Providers/MonerooServiceProvider.php` — auto-discovered service provider; registers bindings and publishes config.
+- `Console/InstallCommand.php` — `php artisan moneroo:install` command.
+- `Exceptions/` — typed exceptions per HTTP status (401, 403, 404, 400/422, 406, 503, etc.).
+- `Config.php` — package constants (`VERSION`, `BASE_URL`, `TIMEOUT`).
+
+Tests live in `tests/` and use Orchestra Testbench; PHPUnit is configured in `phpunit.xml.dist` with randomised execution order.
+
+## Conventions
+
+- Code style is enforced by `axazara/php-cs` (php-cs-fixer); run `composer format` before every commit and `composer sniff` in CI.
+- Static analysis runs PHPStan at level 4 via Larastan; run `composer analyse` before pushing.
+- Every change must include new test cases, a CHANGELOG entry, and a version bump in `Config::VERSION`.
+- The `unused-scanner.php` script at the root can be used to detect unused dependencies (the README calls this `composer unused`, but no such script exists in `composer.json`; run the file directly if needed).
+- Follow KISS: keep classes focused on a single resource (Payment vs. Payout); do not add shared state or side effects to request handling.
+
 ## Git Conventions
 
 ### 1. Branch names
