@@ -4,12 +4,12 @@ Guidance for Claude Code and other AI agents working in this repository.
 
 ## Project overview
 
-This is the official Laravel SDK for the Moneroo payment API, targeting African mobile-money and card payments. It is a Composer package (`moneroo/moneroo-laravel`) that wraps the Moneroo REST API (`https://api.moneroo.io/v1`) and is consumed by Laravel applications that need to initialize/verify payments and payouts. Requires PHP 8.1+ and Laravel 9–12.
+This is the official Laravel SDK for the Moneroo payment API, targeting African mobile-money and card payments. It is a Composer package (`moneroo/moneroo-laravel`) that wraps the Moneroo REST API (`https://api.moneroo.io/v1`) and is consumed by Laravel applications that need to initialize/verify payments and payouts. Requires PHP 8.1+ and Laravel 9–13.
 
 ## Tech stack
 
 - PHP ^8.1
-- Laravel (illuminate/contracts) ^9.0 || ^10.0 || ^11.0 || ^12.0
+- Laravel (illuminate/contracts) ^9.0 || ^10.0 || ^11.0 || ^12.0 || ^13.0
 - GuzzleHTTP ^7.7 (underlying HTTP transport via Laravel's Http facade)
 - PHPUnit ^9.6 / ^10.5 / ^11.0 (test runner via Orchestra Testbench)
 - Larastan ^2.9 / ^3.0 (PHPStan level 4 static analysis)
