@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Moneroo\Laravel\Payment;
 use Moneroo\Laravel\Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class PaymentTest extends TestCase
 {
@@ -21,9 +22,8 @@ class PaymentTest extends TestCase
 
     /**
      * It should init a payment.
-     *
-     * @test
      */
+    #[Test]
     public function it_should_init_a_payment(): void
     {
         Event::fake();

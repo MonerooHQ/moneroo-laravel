@@ -13,6 +13,7 @@ use Moneroo\Laravel\Exceptions\NotAcceptableException;
 use Moneroo\Laravel\Exceptions\ServerErrorException;
 use Moneroo\Laravel\Exceptions\UnauthorizedException;
 use Moneroo\Laravel\Moneroo;
+use PHPUnit\Framework\Attributes\Test;
 
 class RequestTest extends TestCase
 {
@@ -24,9 +25,8 @@ class RequestTest extends TestCase
 
     /**
      * It should make HTTP request.
-     *
-     * @test
      */
+    #[Test]
     public function it_should_make_http_request(): void
     {
         Event::fake();
@@ -53,9 +53,8 @@ class RequestTest extends TestCase
 
     /**
      * It should throw UnauthorizedException if the response status code is 401.
-     *
-     * @test
      */
+    #[Test]
     public function it_should_throw_unauthorized_exception_if_the_response_status_code_is_401(): void
     {
         $this->expectException(UnauthorizedException::class);
@@ -76,9 +75,8 @@ class RequestTest extends TestCase
 
     /**
      * It should throw ForbiddenException if the response status code is 403.
-     *
-     * @test
      */
+    #[Test]
     public function it_should_throw_forbidden_exception_if_the_response_status_code_is_403(): void
     {
         $this->expectException(ForbiddenException::class);
@@ -99,9 +97,8 @@ class RequestTest extends TestCase
 
     /**
      * It should throw InvalidResourceException if the response status code is 404.
-     *
-     * @test
      */
+    #[Test]
     public function it_should_throw_invalid_resource_exception_if_the_response_status_code_is_404(): void
     {
         $this->expectException(InvalidResourceException::class);
@@ -122,9 +119,8 @@ class RequestTest extends TestCase
 
     /**
      * It should throw InvalidPayloadException if the response status code is 400 or 422.
-     *
-     * @test
      */
+    #[Test]
     public function it_should_throw_invalid_payload_exception_if_the_response_status_code_is_400_or_422(): void
     {
         $this->expectException(InvalidPayloadException::class);
@@ -153,9 +149,8 @@ class RequestTest extends TestCase
 
     /**
      * It should throw NotAcceptableException if the response status code is 406.
-     *
-     * @test
      */
+    #[Test]
     public function it_should_throw_not_acceptable_exception_if_the_response_status_code_is_406(): void
     {
         $this->expectException(NotAcceptableException::class);
@@ -176,9 +171,8 @@ class RequestTest extends TestCase
 
     /**
      * It should throw ServerErrorException if the response status code is 500.
-     *
-     * @test
      */
+    #[Test]
     public function it_should_throw_server_error_exception_if_the_response_status_code_is_500(): void
     {
         $this->expectException(ServerErrorException::class);

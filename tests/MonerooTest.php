@@ -5,6 +5,7 @@ namespace Moneroo\Laravel\Tests;
 use Illuminate\Support\Facades\Config;
 use Moneroo\Laravel\Exceptions\InvalidPayloadException;
 use Moneroo\Laravel\Moneroo;
+use PHPUnit\Framework\Attributes\Test;
 
 class MonerooTest extends TestCase
 {
@@ -19,9 +20,8 @@ class MonerooTest extends TestCase
 
     /**
      * Moneroo::__construct() should create an instance of the Moneroo class with no errors.
-     *
-     * @test
      */
+    #[Test]
     public function moneroo_class_is_correctly_instantiated(): void
     {
         $moneroo = new Moneroo();
@@ -31,9 +31,8 @@ class MonerooTest extends TestCase
 
     /**
      * Moneroo::__construct() should throw an InvalidPayloadException when no secret key is provided.
-     *
-     * @test
      */
+    #[Test]
     public function moneroo_class_throws_exception_when_secret_key_is_missing(): void
     {
         $this->expectException(InvalidPayloadException::class);
@@ -45,9 +44,8 @@ class MonerooTest extends TestCase
 
     /**
      * Moneroo::validateData() should validate the provided data according to the provided rules.
-     *
-     * @test
      */
+    #[Test]
     public function data_is_validated_according_to_provided_rules(): void
     {
         $moneroo = new Moneroo();
@@ -60,9 +58,8 @@ class MonerooTest extends TestCase
 
     /**
      * Moneroo::validateData() should throw an InvalidPayloadException when data does not meet the provided rules.
-     *
-     * @test
      */
+    #[Test]
     public function validation_throws_exception_when_data_does_not_meet_rules(): void
     {
         $this->expectException(InvalidPayloadException::class);
